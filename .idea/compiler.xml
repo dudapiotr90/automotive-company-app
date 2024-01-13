@@ -8,11 +8,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="payment-service" />
+        <module name="maintenance-service" />
         <module name="auth-server" />
         <module name="email-service" />
         <module name="api-gateway" />
+        <module name="production-service" />
         <module name="registration-service" />
+        <module name="management-service" />
         <module name="service-registry" />
+        <module name="client-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -20,9 +24,13 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
       <module name="auth-server" options="-parameters" />
+      <module name="client-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="email-service" options="-parameters" />
+      <module name="maintenance-service" options="-parameters" />
+      <module name="management-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
+      <module name="production-service" options="-parameters" />
       <module name="registration-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
     </option>
