@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: production-service
+  config:
+    import: optional:configserver:http://localhost:8085
