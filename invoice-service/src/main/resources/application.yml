@@ -1,5 +1,8 @@
 spring:
   application:
-    name: client-service
+    name: invoice-service
   config:
     import: optional:configserver:http://localhost:8085
+
+host:
+  apiKey: EVPG5XB.NEFW97H-Z89M3N8-QJMGZY3-8HX6P5Q
