@@ -8,19 +8,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="maintenance-service" />
+        <module name="customer-service" />
         <module name="auth-server" />
-        <module name="registration-service" />
         <module name="management-service" />
         <module name="employee-service" />
         <module name="config-server" />
         <module name="payment-service" />
+        <module name="invoice-service" />
         <module name="email-service" />
         <module name="api-gateway" />
         <module name="production-service" />
         <module name="hr-service" />
+        <module name="account-service" />
         <module name="design-service" />
         <module name="service-registry" />
-        <module name="client-service" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
@@ -30,6 +31,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="client-service" target="21" />
       <module name="design-service.main" target="21" />
       <module name="design-service.test" target="21" />
       <module name="employee-service.main" target="21" />
@@ -38,19 +40,21 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="account-service" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="auth-server" options="-parameters" />
       <module name="client-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
+      <module name="customer-service" options="-parameters" />
       <module name="design-service" options="-parameters" />
       <module name="email-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="hr-service" options="-parameters" />
+      <module name="invoice-service" options="-parameters" />
       <module name="maintenance-service" options="-parameters" />
       <module name="management-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="production-service" options="-parameters" />
-      <module name="registration-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
     </option>
   </component>
