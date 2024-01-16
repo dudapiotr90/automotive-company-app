@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="complaint-service" />
         <module name="maintenance-service" />
         <module name="customer-service" />
         <module name="auth-server" />
@@ -44,6 +45,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="auth-server" options="-parameters" />
       <module name="client-service" options="-parameters" />
+      <module name="complaint-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="customer-service" options="-parameters" />
       <module name="design-service" options="-parameters" />
