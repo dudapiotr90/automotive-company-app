@@ -3,5 +3,11 @@ spring:
     name: client-service
   config:
     import: optional:configserver:http://localhost:8085
-
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: 1f183f4da9071c040c0f
+            clientSecret: eb465322cb6f76920767852d1ec0cc4adfa0e171
 

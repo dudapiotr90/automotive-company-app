@@ -33,10 +33,13 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="client-service" target="21" />
+      <module name="customer-service (1)" target="21" />
+      <module name="customer-service (2)" target="21" />
       <module name="design-service.main" target="21" />
       <module name="design-service.test" target="21" />
       <module name="employee-service.main" target="21" />
       <module name="employee-service.test" target="21" />
+      <module name="test-service" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -48,6 +51,8 @@
       <module name="complaint-service" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="customer-service" options="-parameters" />
+      <module name="customer-service (1)" options="-parameters" />
+      <module name="customer-service (2)" options="-parameters" />
       <module name="design-service" options="-parameters" />
       <module name="email-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
@@ -58,6 +63,7 @@
       <module name="payment-service" options="-parameters" />
       <module name="production-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
+      <module name="test-service" options="-parameters" />
     </option>
   </component>
 </project>
