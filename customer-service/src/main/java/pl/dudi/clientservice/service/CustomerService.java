@@ -2,7 +2,7 @@ package pl.dudi.clientservice.service;
 
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-public interface ClientService {
+public interface CustomerService {
 
-    void createClientAccount(OAuth2User user);
+    void createCustomerAccount(OAuth2User user);
 }

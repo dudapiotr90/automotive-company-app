@@ -11,13 +11,18 @@
     <groupId>pl.dudi</groupId>
     <artifactId>customer-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>client-service</name>
-    <description>automotive-app-client-service</description>
+    <name>customer-service</name>
+    <description>automotive-app-customer-service</description>
     <properties>
         <java.version>21</java.version>
         <spring-cloud.version>2023.0.0</spring-cloud.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>pl.dudi</groupId>
+            <artifactId>base-domains</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -33,6 +38,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -53,6 +62,15 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.kohsuke</groupId>
+            <artifactId>github-api</artifactId>
+            <version>1.318</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <dependency>

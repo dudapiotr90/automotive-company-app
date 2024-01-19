@@ -1,13 +1,13 @@
-package pl.dudi.registrationservice;
+package pl.dudi.accountservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RegistrationServiceApplication {
+public class AccountServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RegistrationServiceApplication.class, args);
+		SpringApplication.run(AccountServiceApplication.class, args);
 	}
 
 }
