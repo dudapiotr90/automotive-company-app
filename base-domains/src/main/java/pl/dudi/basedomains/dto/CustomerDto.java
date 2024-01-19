@@ -1,4 +1,4 @@
-package pl.dudi.clientservice.dto;
+package pl.dudi.basedomains.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CustomerDto {
 
-    private String firstName;
-    private String lastName;
+    private String fullName;
+    private int accountCode;
+    private String login;
     private String email;
-    private Long account_code;
 }

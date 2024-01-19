@@ -23,6 +23,7 @@
         <option value="$PROJECT_DIR$/invoice-service/pom.xml" />
         <option value="$PROJECT_DIR$/complaint-service/pom.xml" />
         <option value="$PROJECT_DIR$/test-service/pom.xml" />
+        <option value="$PROJECT_DIR$/base-domains/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

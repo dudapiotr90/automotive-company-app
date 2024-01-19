@@ -19,7 +19,7 @@ import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/client/history")
+@RequestMapping("/customer/history")
 public class HistoryController {
 
     private final HistoryService historyService;

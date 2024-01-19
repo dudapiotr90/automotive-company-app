@@ -1,10 +1,10 @@
-package pl.dudi.registrationservice;
+package pl.dudi.clientservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RegistrationServiceApplicationTests {
+class CustomerServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
