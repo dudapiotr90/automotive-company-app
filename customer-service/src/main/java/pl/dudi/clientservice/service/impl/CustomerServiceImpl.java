@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void createCustomerAccount(OAuth2User user) {
         CustomerDto customer = extractUserData(user);
         String response = accountServiceAPIClient.registerCustomerAccount(customer);
-        log.info(String.format("Account %s " + response, customer.getAccountCode()));
+        log.info(String.format("Account %s " + response, customer.getCustomerCode()));
     }
 
     private CustomerDto extractUserData(OAuth2User user) {
@@ -29,7 +29,9 @@ public class CustomerServiceImpl implements CustomerService {
         int customerId = Objects.requireNonNull(user.getAttribute("id"));
         String customerLogin = Objects.requireNonNull(user.getAttribute("login"));
         String customerEmail = Objects.requireNonNull(user.getAttribute("email"));
-        return new CustomerDto(customerFullName, customerId, customerLogin,customerEmail );
+        CustomerDto customerDto = new CustomerDto(customerFullName, customerId, customerLogin, customerEmail);
+        System.out.println(customerDto);
+        return customerDto;
     }
 
 }

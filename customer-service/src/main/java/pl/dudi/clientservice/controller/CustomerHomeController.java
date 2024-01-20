@@ -22,6 +22,7 @@ public class CustomerHomeController {
     public ResponseEntity<String> customerDetails(
         @AuthenticationPrincipal OAuth2User user
     ) {
+
         System.out.println(user.getAttributes());
         System.out.println(user.getAuthorities());
         customerService.createCustomerAccount(user);
