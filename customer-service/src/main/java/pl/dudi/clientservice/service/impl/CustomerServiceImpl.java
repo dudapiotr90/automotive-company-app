@@ -18,10 +18,15 @@ public class CustomerServiceImpl implements CustomerService {
     private final AccountServiceAPIClient accountServiceAPIClient;
 
     @Override
-    public void createCustomerAccount(OAuth2User user) {
+    public CustomerDto prepareCustomerDetails(OAuth2User user) {
         CustomerDto customer = extractUserData(user);
-        String response = accountServiceAPIClient.registerCustomerAccount(customer);
-        log.info(String.format("Account %s " + response, customer.getCustomerCode()));
+        CustomerDto existingCustomer = accountServiceAPIClient.findCustomerAccount(customer.getCustomerCode());
+        if (Objects.isNull(existingCustomer)) {
+            CustomerDto registeredCustomer = accountServiceAPIClient.registerCustomerAccount(customer);
+            log.info(String.format("Account %s created" , customer.getCustomerCode()));
+            return registeredCustomer;
+        }
+        return existingCustomer;
     }
 
     private CustomerDto extractUserData(OAuth2User user) {
