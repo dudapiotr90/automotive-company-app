@@ -1,6 +1,8 @@
 package pl.dudi.clientservice.service.feignservice;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.dudi.basedomains.dto.CustomerDto;
@@ -10,5 +12,8 @@ import pl.dudi.clientservice.configuration.feign.FeignClientConfig;
 public interface AccountServiceAPIClient {
 
     @PostMapping("/accounts/customer")
-    String registerCustomerAccount(@RequestBody CustomerDto customer);
+    CustomerDto registerCustomerAccount(@RequestBody CustomerDto customer);
+
+    @GetMapping("accounts/customer/{code}")
+    CustomerDto findCustomerAccount(@PathVariable("code") int customerCode);
 }

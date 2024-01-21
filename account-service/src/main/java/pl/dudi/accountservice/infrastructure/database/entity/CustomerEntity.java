@@ -20,7 +20,7 @@ public class CustomerEntity {
     private Long id;
 
     private String fullName;
-    private long customerCode;
+    private int customerCode;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")

@@ -29,6 +29,12 @@ public class RegistrationServiceImpl implements RegistrationService {
         return customerMapper.mapToCustomerDto(savedCustomer);
     }
 
+    @Override
+    public CustomerDto findCustomer(int customerCode) {
+        Customer customer = customerDAO.findCustomer(customerCode);
+        return customerMapper.mapToCustomerDto(customer);
+    }
+
     private Customer buildCustomer(CustomerDto customerDto) {
         return Customer.builder()
             .fullName(customerDto.getFullName())
