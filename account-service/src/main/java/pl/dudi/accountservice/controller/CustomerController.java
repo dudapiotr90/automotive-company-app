@@ -15,6 +15,7 @@ public class CustomerController {
 
     private final RegistrationService registrationService;
     private final EmailProducer emailProducer;
+
     @PostMapping
     public ResponseEntity<CustomerDto> registerCustomer(@RequestBody CustomerDto customer) {
         CustomerDto customerDto = registrationService.registerCustomer(customer);

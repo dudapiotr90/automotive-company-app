@@ -3,3 +3,15 @@ spring:
     name: account-service
   config:
     import: optional:configserver:http://localhost:8085
+
+rabbitmq:
+  exchange:
+    account:
+      name: account_exchange
+  queue:
+    email:
+      name: email_queue
+  binding:
+    email:
+      routing:
+        key: email_routing_key
