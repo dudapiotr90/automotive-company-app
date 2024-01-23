@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -25,4 +26,7 @@ public class OrderEntity {
     private OffsetDateTime issuedDateTime;
     private OffsetDateTime realizedDateTime;
     private String comment;
+
+    @OneToMany(mappedBy = "order")
+    private Set<OrderItemEntity> orderItems;
 }

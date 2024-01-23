@@ -1,4 +1,4 @@
-package pl.dudi.emailservice.listener;
+package pl.dudi.emailservice.listener.accountservicelistener;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ public class MessageListener {
 
     private final EmailSenderService emailSenderService;
 
-    @RabbitListener(queues = {"${rabbitmq.queue.account.email.name}"})
+    @RabbitListener(queues = {"${rabbitmq.queue.email.name}"})
     public void consumeAccountServiceEmailMessage(EmailMessage emailMessage) {
         emailSenderService.sendEmail(emailMessage.getToEmail(), emailMessage.getBody(), emailMessage.getSubject());
     }
