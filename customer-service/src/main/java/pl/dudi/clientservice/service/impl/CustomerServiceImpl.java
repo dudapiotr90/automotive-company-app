@@ -29,14 +29,13 @@ public class CustomerServiceImpl implements CustomerService {
         return existingCustomer;
     }
 
-    private CustomerDto extractUserData(OAuth2User user) {
+    @Override
+    public CustomerDto extractUserData(OAuth2User user) {
         String customerFullName = Objects.requireNonNull(user.getName());
         int customerId = Objects.requireNonNull(user.getAttribute("id"));
         String customerLogin = Objects.requireNonNull(user.getAttribute("login"));
         String customerEmail = Objects.requireNonNull(user.getAttribute("email"));
-        CustomerDto customerDto = new CustomerDto(customerFullName, customerId, customerLogin, customerEmail);
-        System.out.println(customerDto);
-        return customerDto;
+        return new CustomerDto(customerFullName, customerId, customerLogin, customerEmail);
     }
 
 }

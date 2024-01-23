@@ -21,11 +21,10 @@ public class CustomerHomeController {
     public ResponseEntity<CustomerDto> customerDetails(
         @AuthenticationPrincipal OAuth2User user
     ) {
-
         CustomerDto customerDto = customerService.prepareCustomerDetails(user);
-
-
         return ResponseEntity.ok(customerDto);
+        // TODO maybe when preparing if customer not found redirect to login with oauth or register(classic or with oauth)
     }
+
 
 }
