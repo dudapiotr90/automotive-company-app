@@ -21,6 +21,7 @@
         <module name="api-gateway" />
         <module name="production-service" />
         <module name="hr-service" />
+        <module name="order-service" />
         <module name="account-service" />
         <module name="design-service" />
         <module name="service-registry" />
@@ -62,6 +63,7 @@
       <module name="invoice-service" options="-parameters" />
       <module name="maintenance-service" options="-parameters" />
       <module name="management-service" options="-parameters" />
+      <module name="order-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="production-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
