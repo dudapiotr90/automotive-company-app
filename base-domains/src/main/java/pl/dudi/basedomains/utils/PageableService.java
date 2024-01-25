@@ -12,11 +12,12 @@ public class PageableService {
     // TODO check if correct
     public Pageable preparePageable(
         PageRequestDto defaultRequest,
-        Integer pageNumber,
-        Integer pageSize,
-        String sortHow,
-        String... sortBy
+        PageRequestDto customRequest
     ) {
+        Integer pageNumber = customRequest.getPageNumber();
+        Integer pageSize = customRequest.getPageSize();
+        String sortHow = customRequest.getSortHow();
+        String[] sortBy = customRequest.getSortBy();
         if (Objects.isNull(pageNumber) || pageNumber < 1) {
             pageNumber = defaultRequest.getPageNumber();
         }
