@@ -22,24 +22,16 @@ public class HistoryController {
 
 
     @GetMapping("/order")
-    public ResponseEntity<Page<OrderDto>> showDefaultOrderHistory(
+    public ResponseEntity<Page<OrderDto>> showOrderHistory(
         @AuthenticationPrincipal OAuth2User user,
         @RequestParam(required = false, name = "pageNumber") Integer pageNumber,
         @RequestParam(required = false, name = "pageSize") Integer pageSize,
         @RequestParam(required = false, name = "sortHow") String sortHow,
-        @RequestParam(required = false, name = "sortBy") String sortBy
+        @RequestParam(required = false, name = "sortBy") String... sortBy
     ) {
         Page<OrderDto> orderHistory = historyService.showOrderHistory(user, pageNumber, pageSize, sortHow, sortBy);
         return ResponseEntity.ok(orderHistory);
     }
-//    @GetMapping("/order")
-//    public ResponseEntity<Page<OrderDto>> showDefaultOrderHistory(
-//        @RequestBody PageRequestDto pageRequest,
-//        @AuthenticationPrincipal OAuth2User user
-//        ) {
-//        Page<OrderDto> orderHistory = historyService.showOrderHistory(user,pageRequest);
-//        return ResponseEntity.ok(orderHistory);
-//    }
 
     @GetMapping("/invoice")
     public ResponseEntity<Page<OrderDto>> showInvoiceHistory() {

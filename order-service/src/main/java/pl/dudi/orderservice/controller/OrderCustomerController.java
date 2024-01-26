@@ -1,9 +1,10 @@
-package pl.dudi.orderservice.configuration;
+package pl.dudi.orderservice.controller;
 
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dudi.basedomains.dto.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
@@ -18,12 +19,12 @@ public class OrderCustomerController {
     private final OrderService orderService;
 
     @GetMapping("/orders/{code}")
-    Page<OrderDto> getOrderHistory(
+    public ResponseEntity<Page<OrderDto>> getOrderHistory(
         @PathVariable(name = "code") int customerCode,
         @RequestBody PageRequestDto pageRequestDto
     ){
         Page<OrderDto> orders = orderService.getOrders(customerCode, pageRequestDto);
-        return null;
+        return ResponseEntity.ok(orders);
     };
 
 }
