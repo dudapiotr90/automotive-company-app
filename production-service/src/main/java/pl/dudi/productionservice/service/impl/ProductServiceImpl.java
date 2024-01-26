@@ -9,12 +9,12 @@ import pl.dudi.basedomains.dto.ProductDto;
 import pl.dudi.basedomains.dto.ProductsDto;
 import pl.dudi.basedomains.utils.PageableService;
 import pl.dudi.productionservice.infrastructure.database.dao.ProductDao;
-import pl.dudi.productionservice.infrastructure.database.entity.ProductEntity;
 import pl.dudi.productionservice.mappers.ProductMapper;
 import pl.dudi.productionservice.model.Product;
 import pl.dudi.productionservice.service.ProductService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,17 +26,26 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
     @Override
     public String addProduct(ProductDto productDto) {
-        return null;
+        Product product = createProductDetails(productDto);
+        Product saved = productDao.saveProduct(product);
+        return saved.getProductNumber();
     }
 
     @Override
     public Set<String> addProducts(ProductsDto productsDto) {
-        return null;
+        Set<Product> products = productsDto.getProducts().stream()
+            .map(this::createProductDetails)
+            .collect(Collectors.toSet());
+        Set<Product> savedProducts = productDao.saveProducts(products);
+        return savedProducts.stream()
+            .map(Product::getProductNumber)
+            .collect(Collectors.toSet());
     }
 
     @Override
     public ProductDto getProduct(String productNumber) {
-        return null;
+        Product product = productDao.findByProductNumber(productNumber);
+        return productMapper.mapToProductDto(product);
     }
 
     @Override
@@ -45,5 +54,16 @@ public class ProductServiceImpl implements ProductService {
         Pageable pageable = pageableService.preparePageable(DEFAULT_PRODUCT_SEARCH, pageRequestDto);
         Page<Product> products = productDao.findProducts(pageable);
         return products.map(productMapper::mapToProductDto);
+    }
+
+    private Product createProductDetails(ProductDto productDto) {
+        return Product.builder()
+            .productNumber(productDto.getProductNumber())
+            .available(false)
+            .inProduction(false)
+            .description(productDto.getDescription())
+            .creationDate(productDto.getCreationDate())
+            .designerCode(productDto.getDesignerCode())
+            .build();
     }
 }
