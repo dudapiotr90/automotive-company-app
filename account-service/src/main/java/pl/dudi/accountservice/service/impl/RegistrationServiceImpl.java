@@ -3,7 +3,7 @@ package pl.dudi.accountservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.dudi.accountservice.infrastructure.database.repository.dao.CustomerDAO;
+import pl.dudi.accountservice.infrastructure.database.dao.CustomerDAO;
 import pl.dudi.accountservice.mapper.CustomerMapper;
 import pl.dudi.accountservice.model.Account;
 import pl.dudi.accountservice.model.Customer;

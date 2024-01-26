@@ -1,4 +1,4 @@
-package pl.dudi.accountservice.infrastructure.database.repository.dao;
+package pl.dudi.accountservice.infrastructure.database.dao;
 
 import pl.dudi.accountservice.model.Customer;
 
