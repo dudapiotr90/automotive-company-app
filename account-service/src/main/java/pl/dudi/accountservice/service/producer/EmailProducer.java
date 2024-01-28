@@ -2,6 +2,8 @@ package pl.dudi.accountservice.service.producer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,15 @@ public class EmailProducer {
 
     public void sendRegistrationConfirmationEmail(EmailMessage emailMessage) {
         log.info(String.format("Confirmation email sent to RabbitMQ --> %s",emailMessage));
+
+
+//        Message message = rabbitTemplate.getMessageConverter().toMessage(emailMessage, new MessageProperties());
+//        message.getMessageProperties().setHeaders(headers);
+
         rabbitTemplate.convertAndSend(exchange,emailRoutingKey,emailMessage);
+//        rabbitTemplate.send(exchange,emailRoutingKey,emailMessage);
+
+
+        //
     }
 }

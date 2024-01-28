@@ -21,6 +21,7 @@ public class HistoryController {
     private final HistoryService historyService;
 
 
+    // Maybe change outh2user after gateway filter
     @GetMapping("/order")
     public ResponseEntity<Page<OrderDto>> showOrderHistory(
         @AuthenticationPrincipal OAuth2User user,

@@ -6,4 +6,6 @@ import pl.dudi.basedomains.dto.PageRequestDto;
 
 public interface OrderService {
     Page<OrderDto> getOrders(int customerCode, PageRequestDto pageRequestDto);
+
+    void processOrder();
 }
