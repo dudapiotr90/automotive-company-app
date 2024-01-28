@@ -1,4 +1,4 @@
-package pl.dudi.accountservice.configuration.rabbitmq;
+package pl.dudi.orderservice.configuration.rabbitmq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.*;
@@ -14,17 +14,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
 
-    @Value("${rabbitmq.exchange.account.name}")
+    @Value("${rabbitmq.exchange.order.name}")
     private String exchange;
-    @Value("${rabbitmq.queue.email.name}")
-    private String emailQueue;
-    @Value("${rabbitmq.binding.email.routing.key}")
-    private String emailRoutingKey;
+    @Value("${rabbitmq.queue.order.name}")
+    private String orderQueue;
+    @Value("${rabbitmq.binding.order.customer.routing.key}")
+    private String orderCustomerRoutingKey;
 
 
     @Bean
     public Queue emailQueue() {
-        return new Queue(emailQueue);
+        return new Queue(orderQueue);
     }
 
     @Bean
@@ -37,7 +37,7 @@ public class RabbitMqConfig {
         return BindingBuilder
             .bind(emailQueue())
             .to(exchange())
-            .with(emailRoutingKey);
+            .with(orderCustomerRoutingKey);
     }
     @Bean
     public MessageConverter jsonConverter() {
