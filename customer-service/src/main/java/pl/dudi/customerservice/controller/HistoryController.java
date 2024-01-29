@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.dudi.basedomains.dto.OrderDto;
+import pl.dudi.customerservice.model.InvoiceDto;
 import pl.dudi.customerservice.service.HistoryService;
 
 @RestController
@@ -35,8 +36,15 @@ public class HistoryController {
     }
 
     @GetMapping("/invoice")
-    public ResponseEntity<Page<OrderDto>> showInvoiceHistory() {
-        return null;
+    public ResponseEntity<Page<InvoiceDto>> showInvoiceHistory(
+        @AuthenticationPrincipal OAuth2User user,
+        @RequestParam(required = false, name = "pageNumber") Integer pageNumber,
+        @RequestParam(required = false, name = "pageSize") Integer pageSize,
+        @RequestParam(required = false, name = "sortHow") String sortHow,
+        @RequestParam(required = false, name = "sortBy") String... sortBy
+    ) {
+        Page<InvoiceDto> invoiceHistory = historyService.showInvoiceHistory(user, pageNumber, pageSize, sortHow, sortBy);
+        return ResponseEntity.ok(invoiceHistory);
     }
 
 
