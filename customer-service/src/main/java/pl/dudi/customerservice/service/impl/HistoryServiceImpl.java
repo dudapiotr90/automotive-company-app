@@ -10,8 +10,8 @@ import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.customerservice.model.InvoiceDto;
 import pl.dudi.customerservice.service.CustomerService;
 import pl.dudi.customerservice.service.HistoryService;
-import pl.dudi.customerservice.service.feignservice.InvoiceServiceAPIClient;
-import pl.dudi.customerservice.service.feignservice.OrderServiceAPIClient;
+import pl.dudi.customerservice.service.apiclient.InvoiceServiceAPIClient;
+import pl.dudi.customerservice.service.apiclient.OrderServiceAPIClient;
 
 @Service
 @RequiredArgsConstructor

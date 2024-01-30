@@ -1,4 +1,4 @@
-package pl.dudi.customerservice.exception.feign;
+package pl.dudi.basedomains.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
