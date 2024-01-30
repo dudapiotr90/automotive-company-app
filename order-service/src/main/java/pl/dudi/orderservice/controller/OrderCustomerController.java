@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dudi.basedomains.dto.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
-import pl.dudi.orderservice.model.InvoiceDto;
-import pl.dudi.orderservice.model.OrderRequestDto;
+import pl.dudi.orderservice.dto.InvoiceDto;
+import pl.dudi.orderservice.dto.OrderRequestDto;
 import pl.dudi.orderservice.service.OrderService;
 
 @Slf4j
@@ -30,12 +30,12 @@ public class OrderCustomerController {
     }
 
     @PostMapping("/order")
-    public ResponseEntity<InvoiceDto> issueOrder(
-        @RequestHeader("customerCode") String customerCode,
+    public ResponseEntity<String> issueOrder(
+        @RequestHeader("customerCode") int customerCode,
         @RequestBody OrderRequestDto orderRequest
     ) {
-        orderService.processOrder();
-        return null;
+        String message = orderService.processOrder(customerCode,orderRequest);
+        return ResponseEntity.ok(message);
     }
 
 }

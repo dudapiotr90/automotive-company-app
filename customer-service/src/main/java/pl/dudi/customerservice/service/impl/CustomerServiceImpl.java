@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import pl.dudi.basedomains.dto.CustomerDto;
 import pl.dudi.customerservice.service.CustomerService;
-import pl.dudi.customerservice.service.feignservice.AccountServiceAPIClient;
+import pl.dudi.customerservice.service.apiclient.AccountServiceAPIClient;
 
 import java.util.Objects;
 
