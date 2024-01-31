@@ -15,9 +15,9 @@ public class Order {
      String orderNumber;
      OffsetDateTime issuedDateTime;
      OffsetDateTime realizedDateTime;
+     OffsetDateTime cancelTill;
      String comment;
      Boolean realized;
      Boolean inProgress;
-     OffsetDateTime cancelTill;
-     Set<String> productsCode;
+     Set<OrderItem> orderItems;
 }

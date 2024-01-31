@@ -23,9 +23,11 @@ public class MessageListener {
 
 
     @RabbitListener(queues = {"${rabbitmq.queue.order.email.name}"})
-    public void consumeOrderServiceEmailMessage(CustomerOrderMessage message) {
+    public String consumeOrderServiceEmailMessage(CustomerOrderMessage message) {
         // TODO create email body
         emailSenderService.sendEmail(message.customer().getEmail(), IssuedOrderEmailTemplate.emailBody, IssuedOrderEmailTemplate.emailSubject);
+        String response = "Email successfully send to your mailbox";
+        return response;
     }
 
 }

@@ -3,15 +3,13 @@ package pl.dudi.orderservice.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Set;
+import pl.dudi.basedomains.dto.OrderDto;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderRequestDto {
+public class OrderResponseMessage {
 
-    private String customerComment;
-    private Set<OrderItemDto> orderItems;
-
+    private String emailMessage;
+    private OrderDto orderDto;
 }

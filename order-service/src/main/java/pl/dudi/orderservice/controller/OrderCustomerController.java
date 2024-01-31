@@ -10,6 +10,7 @@ import pl.dudi.basedomains.dto.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.orderservice.dto.InvoiceDto;
 import pl.dudi.orderservice.dto.OrderRequestDto;
+import pl.dudi.orderservice.dto.OrderResponseMessage;
 import pl.dudi.orderservice.service.OrderService;
 
 @Slf4j
@@ -30,11 +31,11 @@ public class OrderCustomerController {
     }
 
     @PostMapping("/order")
-    public ResponseEntity<String> issueOrder(
+    public ResponseEntity<OrderResponseMessage> issueOrder(
         @RequestHeader("customerCode") int customerCode,
         @RequestBody OrderRequestDto orderRequest
     ) {
-        String message = orderService.processOrder(customerCode,orderRequest);
+        OrderResponseMessage message = orderService.processOrder(customerCode,orderRequest);
         return ResponseEntity.ok(message);
     }
 
