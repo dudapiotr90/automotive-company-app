@@ -1,0 +1,31 @@
+package pl.dudi.orderservice.service.producer;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import pl.dudi.basedomains.dto.CustomerDto;
+import pl.dudi.orderservice.dto.OrderRequestDto;
+import pl.dudi.orderservice.model.rabbitmqmessage.CustomerOrderMessage;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class EmailProducer {
+
+    @Value("${rabbitmq.exchange.order.name}")
+    private String exchange;
+
+    @Value("${rabbitmq.binding.order.email.routing.key}")
+    private String orderEmailRoutingKey;
+
+    private final RabbitTemplate rabbitTemplate;
+
+
+    public String sendOrderProcessingEmail(CustomerDto customerDto, OrderRequestDto orderRequest) {
+        CustomerOrderMessage message = new CustomerOrderMessage(customerDto, orderRequest);
+        Object response = rabbitTemplate.convertSendAndReceive(exchange, orderEmailRoutingKey, message);
+        return response.toString();
+    }
+}

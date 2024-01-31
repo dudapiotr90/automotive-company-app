@@ -16,15 +16,15 @@ public class RabbitMqConfig {
 
     @Value("${rabbitmq.exchange.account.name}")
     private String exchange;
-    @Value("${rabbitmq.queue.email.name}")
-    private String emailQueue;
-    @Value("${rabbitmq.binding.email.routing.key}")
-    private String emailRoutingKey;
+    @Value("${rabbitmq.queue.account.email.name}")
+    private String accountEmailQueue;
+    @Value("${rabbitmq.binding.account.email.routing.key}")
+    private String accountEmailRoutingKey;
 
 
     @Bean
     public Queue emailQueue() {
-        return new Queue(emailQueue);
+        return new Queue(accountEmailQueue);
     }
 
     @Bean
@@ -37,7 +37,7 @@ public class RabbitMqConfig {
         return BindingBuilder
             .bind(emailQueue())
             .to(exchange())
-            .with(emailRoutingKey);
+            .with(accountEmailRoutingKey);
     }
     @Bean
     public MessageConverter jsonConverter() {

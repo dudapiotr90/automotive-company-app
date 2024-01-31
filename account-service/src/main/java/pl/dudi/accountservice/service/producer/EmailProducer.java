@@ -2,19 +2,17 @@ package pl.dudi.accountservice.service.producer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.dudi.accountservice.dto.EmailMessage;
+import pl.dudi.basedomains.dto.EmailMessage;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmailProducer {
 
-    @Value("${rabbitmq.exchange.account.name}")
+    @Value("${rabbitmq.exchange.email.name}")
     private String exchange;
 
     @Value("${rabbitmq.binding.email.routing.key}")

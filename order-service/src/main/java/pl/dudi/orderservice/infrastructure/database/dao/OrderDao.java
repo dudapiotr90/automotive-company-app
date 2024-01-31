@@ -1,4 +1,4 @@
-package pl.dudi.orderservice.infrastructure.database.repository.dao;
+package pl.dudi.orderservice.infrastructure.database.dao;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

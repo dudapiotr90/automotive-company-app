@@ -22,7 +22,3 @@ spring:
           timeout: 3000
           writetimeout: 5000
 
-rabbitmq:
-  queue:
-    email:
-      name: email_queue
