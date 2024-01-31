@@ -12,5 +12,4 @@ public class OrderItemDto {
 
     private String productNumber;
     private BigDecimal quantity;
-    private BigDecimal totalCost;
 }

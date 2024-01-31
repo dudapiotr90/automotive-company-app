@@ -14,6 +14,5 @@ public class OrderItem {
     Long orderItemId;
     BigDecimal quantity;
     String productNumber;
-    String comment;
     Order order;
 }

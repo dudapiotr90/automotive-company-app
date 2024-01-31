@@ -23,7 +23,6 @@ public class OrderItemEntity {
 
     private BigDecimal quantity;
     private String productCode;
-    private String comment;
 
     @ManyToOne
     @JoinColumn(name = "order_id")

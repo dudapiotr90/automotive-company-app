@@ -1,7 +1,7 @@
 package pl.dudi.orderservice.model.rabbitmqmessage;
 
 import pl.dudi.basedomains.dto.CustomerDto;
-import pl.dudi.orderservice.dto.OrderRequestDto;
+import pl.dudi.basedomains.dto.OrderDto;
 
-public record CustomerOrderMessage(CustomerDto customer, OrderRequestDto orderRequest) {
+public record CustomerOrderMessage(CustomerDto customer, OrderDto orderDto) {
 }

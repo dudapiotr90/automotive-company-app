@@ -31,5 +31,5 @@ public class OrderEntity {
     private OffsetDateTime cancelTill;
 
     @OneToMany(mappedBy = "order")
-    private Set<String> productsCode;
+    private Set<OrderItemEntity> orderItems;
 }

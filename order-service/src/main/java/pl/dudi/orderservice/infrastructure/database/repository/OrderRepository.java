@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.dudi.orderservice.infrastructure.database.dao.OrderDao;
+import pl.dudi.orderservice.infrastructure.database.entity.OrderEntity;
 import pl.dudi.orderservice.infrastructure.database.repository.jpa.OrderJpaRepository;
 import pl.dudi.orderservice.mapper.OrderMapper;
 import pl.dudi.orderservice.model.Order;
@@ -23,5 +24,12 @@ public class OrderRepository implements OrderDao {
     public Page<Order> findOrders(int customerCode, Pageable pageRequestDto) {
         return orderJpaRepository.findByCustomerCodeAndRealized(customerCode,pageRequestDto,true)
             .map(orderMapper::mapToOrder);
+    }
+
+    @Override
+    public Order addOrderToProcess(int customerDto, Order order) {
+        OrderEntity orderEntity = orderMapper.mapToOrderEntity(order);
+        OrderEntity saved = orderJpaRepository.save(orderEntity);
+        return orderMapper.mapToOrder(orderEntity);
     }
 }

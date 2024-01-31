@@ -6,4 +6,6 @@ import pl.dudi.orderservice.model.Order;
 
 public interface OrderDao {
     Page<Order> findOrders(int customerCode, Pageable pageable);
+
+    Order addOrderToProcess(int customerDto, Order order);
 }

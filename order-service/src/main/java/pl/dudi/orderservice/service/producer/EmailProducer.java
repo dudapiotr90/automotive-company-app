@@ -6,6 +6,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.dudi.basedomains.dto.CustomerDto;
+import pl.dudi.basedomains.dto.OrderDto;
 import pl.dudi.orderservice.dto.OrderRequestDto;
 import pl.dudi.orderservice.model.rabbitmqmessage.CustomerOrderMessage;
 
@@ -23,8 +24,8 @@ public class EmailProducer {
     private final RabbitTemplate rabbitTemplate;
 
 
-    public String sendOrderProcessingEmail(CustomerDto customerDto, OrderRequestDto orderRequest) {
-        CustomerOrderMessage message = new CustomerOrderMessage(customerDto, orderRequest);
+    public String sendOrderProcessingEmail(CustomerDto customerDto, OrderDto orderDto) {
+        CustomerOrderMessage message = new CustomerOrderMessage(customerDto, orderDto);
         Object response = rabbitTemplate.convertSendAndReceive(exchange, orderEmailRoutingKey, message);
         return response.toString();
     }
