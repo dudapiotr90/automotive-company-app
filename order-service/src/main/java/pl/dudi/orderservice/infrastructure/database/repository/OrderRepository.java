@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import pl.dudi.orderservice.infrastructure.database.repository.dao.OrderDao;
+import pl.dudi.orderservice.infrastructure.database.dao.OrderDao;
 import pl.dudi.orderservice.infrastructure.database.repository.jpa.OrderJpaRepository;
 import pl.dudi.orderservice.mapper.OrderMapper;
 import pl.dudi.orderservice.model.Order;

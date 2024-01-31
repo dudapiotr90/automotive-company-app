@@ -8,13 +8,14 @@ import pl.dudi.basedomains.dto.CustomerDto;
 import pl.dudi.basedomains.dto.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.basedomains.utils.PageableService;
-import pl.dudi.orderservice.infrastructure.database.repository.dao.OrderDao;
+import pl.dudi.orderservice.infrastructure.database.dao.OrderDao;
 import pl.dudi.orderservice.mapper.OrderMapper;
 import pl.dudi.orderservice.model.Order;
 import pl.dudi.orderservice.dto.OrderRequestDto;
 import pl.dudi.orderservice.service.OrderService;
 import pl.dudi.orderservice.service.apiclients.AccountServiceAPIClient;
 import pl.dudi.orderservice.service.apiclients.ManagementServiceAPIClient;
+import pl.dudi.orderservice.service.producer.EmailProducer;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
     private final PageableService pageableService;
     private final ManagementServiceAPIClient managementServiceAPIClient;
+    private final EmailProducer emailProducer;
     private final AccountServiceAPIClient accountServiceAPIClient;
 
     @Override
@@ -38,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String processOrder(int customerCode, OrderRequestDto orderRequest) {
         CustomerDto customerDto = accountServiceAPIClient.findCustomerAccount(customerCode);
-         return managementServiceAPIClient.processOrder(customerDto, orderRequest);
+        String responseMessage = emailProducer.sendOrderProcessingEmail(customerDto, orderRequest);
+        return managementServiceAPIClient.processOrder(customerDto, orderRequest);
     }
 }
