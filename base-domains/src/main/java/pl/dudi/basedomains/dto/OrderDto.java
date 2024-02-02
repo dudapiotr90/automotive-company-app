@@ -15,8 +15,7 @@ public class OrderDto {
     OffsetDateTime issuedDateTime;
     OffsetDateTime realizedDateTime;
     String comment;
-    Boolean realized;
-    Boolean inProgress;
+    String status;
     OffsetDateTime cancelTill;
     Set<String> productsCode;
 }

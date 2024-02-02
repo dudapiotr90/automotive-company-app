@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import pl.dudi.accountservice.utility.UuidGenerator;
+import pl.dudi.basedomains.utils.UuidGenerator;
 
 import java.util.Map;
-import java.util.UUID;
 
 @Slf4j
 @RestControllerAdvice(annotations = RestController.class)
