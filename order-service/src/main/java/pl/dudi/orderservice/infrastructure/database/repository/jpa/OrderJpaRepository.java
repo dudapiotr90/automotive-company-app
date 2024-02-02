@@ -5,11 +5,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.dudi.orderservice.infrastructure.database.entity.OrderEntity;
-import pl.dudi.orderservice.model.Order;
+import pl.dudi.orderservice.model.Status;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface OrderJpaRepository extends JpaRepository<OrderEntity,Long> {
 
     // TODO check if works after inserting data
     Page<OrderEntity> findByCustomerCodeAndRealized(int customerCode, Pageable pageable, boolean realized);
+
+    Optional<OrderEntity> findByOrderNumber(String orderNumber);
+
+    List<OrderEntity> findByStatus(Status status);
+
 }

@@ -17,7 +17,6 @@ public class Order {
      OffsetDateTime realizedDateTime;
      OffsetDateTime cancelTill;
      String comment;
-     Boolean realized;
-     Boolean inProgress;
+     Status status;
      Set<OrderItem> orderItems;
 }

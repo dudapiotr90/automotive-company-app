@@ -10,6 +10,6 @@ import pl.dudi.orderservice.dto.OrderRequestDto;
 public interface ManagementServiceAPIClient {
 
 
-    @PostMapping("/management/order")
-    String processOrder(CustomerDto customerDto, OrderRequestDto orderRequest);
+//    @PostMapping("/management/order")
+//    String processOrder(CustomerDto customerDto, OrderRequestDto orderRequest);
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.dudi.orderservice.model.Status;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
@@ -26,8 +27,9 @@ public class OrderEntity {
     private OffsetDateTime realizedDateTime;
     private String comment;
 
-    private Boolean realized;
-    private Boolean inProgress;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     private OffsetDateTime cancelTill;
 
     @OneToMany(mappedBy = "order")

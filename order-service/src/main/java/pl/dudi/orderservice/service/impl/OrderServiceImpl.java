@@ -11,16 +11,18 @@ import pl.dudi.basedomains.utils.PageableService;
 import pl.dudi.basedomains.utils.UuidGenerator;
 import pl.dudi.orderservice.dto.OrderRequestDto;
 import pl.dudi.orderservice.dto.OrderResponseMessage;
+import pl.dudi.orderservice.exception.OrderNotFoundException;
 import pl.dudi.orderservice.infrastructure.database.dao.OrderDao;
 import pl.dudi.orderservice.mapper.OrderMapper;
 import pl.dudi.orderservice.model.Order;
+import pl.dudi.orderservice.model.Status;
 import pl.dudi.orderservice.service.OrderItemService;
 import pl.dudi.orderservice.service.OrderService;
 import pl.dudi.orderservice.service.apiclients.AccountServiceAPIClient;
-import pl.dudi.orderservice.service.apiclients.ManagementServiceAPIClient;
 import pl.dudi.orderservice.service.producer.EmailProducer;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +50,24 @@ public class OrderServiceImpl implements OrderService {
         CustomerDto customerDto = accountServiceAPIClient.findCustomerAccount(customerCode);
         Order order = orderDAO.addOrderToProcess(customerCode, createOrder(orderRequest));
         String emailResponse = emailProducer.sendOrderProcessingEmail(customerDto, orderMapper.mapToOrderDto(order));
-        return new OrderResponseMessage(emailResponse,orderMapper.mapToOrderDto(order));
+        return new OrderResponseMessage(emailResponse, orderMapper.mapToOrderDto(order));
+    }
+
+    @Override
+    public OrderDto getOrder(String orderNumber) {
+        Order order = orderDAO.findOrderByOrderNumber(orderNumber)
+            .orElseThrow(() -> new OrderNotFoundException(String.format(
+                "Order [%s] doesn't exist", orderNumber
+            )));
+        return orderMapper.mapToOrderDto(order);
+    }
+
+    @Override
+    public List<OrderDto> getOrdersToProcess(String status) {
+        List<Order> orders = orderDAO.findOrdersByStatus(Status.valueOf(status.toUpperCase()));
+        return orders.stream()
+            .map(orderMapper::mapToOrderDto)
+            .toList();
     }
 
     private Order createOrder(OrderRequestDto orderRequest) {
@@ -57,8 +76,7 @@ public class OrderServiceImpl implements OrderService {
             .issuedDateTime(OffsetDateTime.now())
             .comment(orderRequest.getCustomerComment())
             .cancelTill(OffsetDateTime.now().plusDays(7))
-            .realized(false)
-            .inProgress(true)
+            .status(Status.ISSUED)
             .orderItems(orderItemService.prepareOrderItems(orderRequest.getOrderItems()))
             .build();
     }

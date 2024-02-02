@@ -10,6 +10,10 @@ import pl.dudi.orderservice.infrastructure.database.entity.OrderEntity;
 import pl.dudi.orderservice.infrastructure.database.repository.jpa.OrderJpaRepository;
 import pl.dudi.orderservice.mapper.OrderMapper;
 import pl.dudi.orderservice.model.Order;
+import pl.dudi.orderservice.model.Status;
+
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -30,6 +34,19 @@ public class OrderRepository implements OrderDao {
     public Order addOrderToProcess(int customerDto, Order order) {
         OrderEntity orderEntity = orderMapper.mapToOrderEntity(order);
         OrderEntity saved = orderJpaRepository.save(orderEntity);
-        return orderMapper.mapToOrder(orderEntity);
+        return orderMapper.mapToOrder(saved);
+    }
+
+    @Override
+    public Optional<Order> findOrderByOrderNumber(String orderNumber) {
+        return orderJpaRepository.findByOrderNumber(orderNumber)
+            .map(orderMapper::mapToOrder);
+    }
+
+    @Override
+    public List<Order> findOrdersByStatus(Status status) {
+        return orderJpaRepository.findByStatus(status).stream()
+            .map(orderMapper::mapToOrder)
+            .toList();
     }
 }
