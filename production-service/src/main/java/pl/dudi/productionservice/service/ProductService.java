@@ -1,8 +1,8 @@
 package pl.dudi.productionservice.service;
 
 import org.springframework.data.domain.Page;
-import pl.dudi.basedomains.dto.ProductDto;
-import pl.dudi.basedomains.dto.ProductsDto;
+import pl.dudi.basedomains.dto.products.ProductDto;
+import pl.dudi.basedomains.dto.products.ProductsDto;
 
 import java.util.Set;
 

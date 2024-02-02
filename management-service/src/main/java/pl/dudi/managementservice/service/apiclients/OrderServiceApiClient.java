@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.dudi.basedomains.dto.OrderDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.managementservice.configuration.feign.FeignClientConfig;
 
 import java.util.List;

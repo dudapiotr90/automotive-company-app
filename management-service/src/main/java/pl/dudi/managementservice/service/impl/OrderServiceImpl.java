@@ -2,7 +2,7 @@ package pl.dudi.managementservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.dudi.basedomains.dto.OrderDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.managementservice.service.OrderService;
 import pl.dudi.managementservice.service.apiclients.OrderServiceApiClient;
 

@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.dudi.basedomains.dto.CustomerDto;
-import pl.dudi.basedomains.dto.OrderDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.basedomains.utils.PageableService;
 import pl.dudi.basedomains.utils.UuidGenerator;

@@ -7,9 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pl.dudi.basedomains.dto.ProductDto;
-import pl.dudi.basedomains.dto.ProductsDto;
-import pl.dudi.basedomains.utils.PageableService;
+import pl.dudi.basedomains.dto.products.ProductDto;
+import pl.dudi.basedomains.dto.products.ProductsDto;
 import pl.dudi.productionservice.service.ProductService;
 
 import java.util.Set;

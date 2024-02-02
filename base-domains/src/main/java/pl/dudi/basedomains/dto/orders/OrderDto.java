@@ -1,4 +1,4 @@
-package pl.dudi.basedomains.dto;
+package pl.dudi.basedomains.dto.orders;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,5 +17,5 @@ public class OrderDto {
     String comment;
     String status;
     OffsetDateTime cancelTill;
-    Set<String> productsCode;
+    Set<OrderItemDto> items;
 }

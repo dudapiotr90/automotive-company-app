@@ -3,7 +3,7 @@ package pl.dudi.orderservice.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.dudi.basedomains.dto.OrderDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 
 @Data
 @NoArgsConstructor

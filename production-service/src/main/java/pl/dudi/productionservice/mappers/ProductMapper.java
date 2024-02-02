@@ -2,7 +2,7 @@ package pl.dudi.productionservice.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
-import pl.dudi.basedomains.dto.ProductDto;
+import pl.dudi.basedomains.dto.products.ProductDto;
 import pl.dudi.productionservice.infrastructure.database.entity.ProductEntity;
 import pl.dudi.productionservice.model.Product;
 

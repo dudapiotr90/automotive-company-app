@@ -6,8 +6,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.dudi.basedomains.dto.CustomerDto;
-import pl.dudi.basedomains.dto.OrderDto;
-import pl.dudi.orderservice.dto.OrderRequestDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.orderservice.model.rabbitmqmessage.CustomerOrderMessage;
 
 @Slf4j
