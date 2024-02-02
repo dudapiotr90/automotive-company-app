@@ -1,6 +1,6 @@
 package pl.dudi.managementservice.service;
 
-import pl.dudi.basedomains.dto.OrderDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 
 import java.util.List;
 

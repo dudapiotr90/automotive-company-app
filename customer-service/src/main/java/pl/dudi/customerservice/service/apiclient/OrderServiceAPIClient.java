@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import pl.dudi.basedomains.dto.OrderDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
 
 @FeignClient(name = "order-service")

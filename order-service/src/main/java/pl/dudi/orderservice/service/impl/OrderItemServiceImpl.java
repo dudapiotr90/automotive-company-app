@@ -3,8 +3,7 @@ package pl.dudi.orderservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.dudi.orderservice.dto.OrderItemDto;
-import pl.dudi.orderservice.mapper.OrderItemMapper;
+import pl.dudi.basedomains.dto.orders.OrderItemDto;
 import pl.dudi.orderservice.model.OrderItem;
 import pl.dudi.orderservice.service.OrderItemService;
 

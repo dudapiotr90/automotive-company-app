@@ -1,4 +1,4 @@
-package pl.dudi.basedomains.dto;
+package pl.dudi.basedomains.dto.products;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -2,7 +2,7 @@ package pl.dudi.orderservice.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
-import pl.dudi.basedomains.dto.OrderDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.orderservice.infrastructure.database.entity.OrderEntity;
 import pl.dudi.orderservice.model.Order;
 

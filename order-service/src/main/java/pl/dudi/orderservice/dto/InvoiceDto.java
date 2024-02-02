@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.dudi.basedomains.dto.CustomerDto;
+import pl.dudi.basedomains.dto.orders.OrderItemDto;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
