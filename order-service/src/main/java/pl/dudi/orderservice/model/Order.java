@@ -19,4 +19,5 @@ public class Order {
      String comment;
      Status status;
      Set<OrderItem> orderItems;
+     int customerCode;
 }

@@ -26,6 +26,7 @@ public class OrderEntity {
     private OffsetDateTime issuedDateTime;
     private OffsetDateTime realizedDateTime;
     private String comment;
+    private int customerCode;
 
     @Enumerated(EnumType.STRING)
     private Status status;

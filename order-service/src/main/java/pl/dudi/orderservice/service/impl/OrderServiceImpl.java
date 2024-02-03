@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderResponseMessage processOrder(int customerCode, OrderRequestDto orderRequest) {
         CustomerDto customerDto = accountServiceAPIClient.findCustomerAccount(customerCode);
-        Order order = orderDAO.addOrderToProcess(customerCode, createOrder(orderRequest));
+        Order order = orderDAO.addOrderToProcess(customerCode, createOrder(orderRequest,customerCode));
         String emailResponse = emailProducer.sendOrderProcessingEmail(customerDto, orderMapper.mapToOrderDto(order));
         return new OrderResponseMessage(emailResponse, orderMapper.mapToOrderDto(order));
     }
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
             .toList();
     }
 
-    private Order createOrder(OrderRequestDto orderRequest) {
+    private Order createOrder(OrderRequestDto orderRequest, int customerCode) {
         return Order.builder()
             .orderNumber(generator.generateUuid())
             .issuedDateTime(OffsetDateTime.now())
@@ -78,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
             .cancelTill(OffsetDateTime.now().plusDays(7))
             .status(Status.ISSUED)
             .orderItems(orderItemService.prepareOrderItems(orderRequest.getOrderItems()))
+            .customerCode(customerCode)
             .build();
     }
 

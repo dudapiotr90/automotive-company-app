@@ -14,7 +14,6 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderServiceApiClient orderServiceApiClient;
 
-
     @Override
     public OrderDto showOrder(String orderNumber) {
         return orderServiceApiClient.showOrder(orderNumber);
