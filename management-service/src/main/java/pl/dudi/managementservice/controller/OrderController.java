@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dudi.basedomains.dto.orders.OrderDto;
-import pl.dudi.managementservice.dto.ProductionOrderDto;
+import pl.dudi.managementservice.dto.ProductionTaskDto;
 import pl.dudi.managementservice.service.OrderService;
 
 import java.util.List;
@@ -35,9 +35,4 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
 
-    public void processOrder(
-        @RequestBody ProductionOrderDto order
-    ) {
-
-    }
 }
