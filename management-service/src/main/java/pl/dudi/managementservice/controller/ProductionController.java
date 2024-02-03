@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.dudi.managementservice.dto.ProductionOrderDto;
+import pl.dudi.managementservice.dto.IssueTaskConfirmationResponse;
+import pl.dudi.managementservice.dto.MachineScheduleDto;
+import pl.dudi.managementservice.dto.ProductionTaskDto;
+import pl.dudi.managementservice.model.MachineSchedule;
+import pl.dudi.managementservice.service.ProductionService;
 
 
 @Slf4j
@@ -13,10 +17,23 @@ import pl.dudi.managementservice.dto.ProductionOrderDto;
 @RequestMapping("/management")
 public class ProductionController {
 
+    private ProductionService productionService;
+
     @PostMapping("/production")
-    public ResponseEntity<String> issueProduction(
-        @RequestBody ProductionOrderDto items
+    public ResponseEntity<IssueTaskConfirmationResponse> issueProduction(
+        @RequestBody ProductionTaskDto task
         ) {
-        return ResponseEntity.ok("Added to production");
+        IssueTaskConfirmationResponse confirmation = productionService.issueTask(task);
+        return ResponseEntity.ok(confirmation);
     }
+
+    @GetMapping("/production")
+    public ResponseEntity<MachineScheduleDto> getMachineSchedule(
+        @RequestParam("machineCode") String machineCode
+    ) {
+        MachineScheduleDto schedule = productionService.getMachineSchedule(machineCode);
+        return ResponseEntity.ok(schedule);
+    }
+
+
 }

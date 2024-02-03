@@ -25,6 +25,7 @@
         <module name="account-service" />
         <module name="design-service" />
         <module name="service-registry" />
+        <module name="toolroom-service" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />
@@ -68,6 +69,7 @@
       <module name="production-service" options="-parameters" />
       <module name="service-registry" options="-parameters" />
       <module name="test-service" options="-parameters" />
+      <module name="toolroom-service" options="-parameters" />
     </option>
   </component>
 </project>

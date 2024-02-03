@@ -10,7 +10,7 @@ import pl.dudi.managementservice.configuration.feign.FeignClientConfig;
 
 import java.util.List;
 
-@FeignClient(name="management-service",configuration = FeignClientConfig.class)
+@FeignClient(name="order-service",configuration = FeignClientConfig.class)
 public interface OrderServiceApiClient {
 
 

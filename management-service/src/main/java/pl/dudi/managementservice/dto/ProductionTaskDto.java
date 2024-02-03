@@ -10,13 +10,14 @@ import java.time.OffsetDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductionOrderDto {
+public class ProductionTaskDto {
 
     private String productNumber;
     private BigDecimal piecesToMake;
     private String priority;
+    private String status;
+    private String taskDescription;
     private OffsetDateTime started;
     private OffsetDateTime deadline;
     private Long piecesAlreadyMade;
-    private String status;
 }
