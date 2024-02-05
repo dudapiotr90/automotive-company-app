@@ -23,6 +23,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public InvoiceDto issueInvoice(String orderNumber) {
         // TODO
-        return null;
+
+        InvoiceDto invoiceDto = invoiceProducer.generateInvoice(orderNumber);
+        emailProducer.sendInvoiceToCustomer(invoiceDto);
+        return invoiceDto;
     }
 }
