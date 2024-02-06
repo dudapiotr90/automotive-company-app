@@ -12,6 +12,7 @@
         <module name="customer-service" />
         <module name="auth-server" />
         <module name="management-service" />
+        <module name="file-service" />
         <module name="employee-service" />
         <module name="config-server" />
         <module name="base-domains" />
@@ -60,6 +61,7 @@
       <module name="design-service" options="-parameters" />
       <module name="email-service" options="-parameters" />
       <module name="employee-service" options="-parameters" />
+      <module name="file-service" options="-parameters" />
       <module name="hr-service" options="-parameters" />
       <module name="invoice-service" options="-parameters" />
       <module name="maintenance-service" options="-parameters" />

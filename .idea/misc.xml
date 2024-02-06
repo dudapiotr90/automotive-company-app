@@ -26,6 +26,7 @@
         <option value="$PROJECT_DIR$/base-domains/pom.xml" />
         <option value="$PROJECT_DIR$/order-service/pom.xml" />
         <option value="$PROJECT_DIR$/toolroom-service/pom.xml" />
+        <option value="$PROJECT_DIR$/file-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
