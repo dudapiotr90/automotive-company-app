@@ -1,4 +1,4 @@
-package pl.dudi.managementservice.dto;
+package pl.dudi.invoiceservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -22,6 +22,7 @@ public class EmailProducer {
 
 
     public String sendInvoiceToCustomer(InvoiceDto invoiceDto) {
+        rabbitTemplate.convertSendAndReceive(exchange, managementEmailRoutingKey, invoiceDto);
         return null;
     }
 }

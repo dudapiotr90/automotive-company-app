@@ -6,8 +6,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import pl.dudi.emailservice.dto.CustomerOrderMessage;
 import pl.dudi.emailservice.dto.EmailMessage;
+import pl.dudi.emailservice.dto.InvoiceDto;
 import pl.dudi.emailservice.model.emailtemplates.IssuedOrderEmailTemplate;
-import pl.dudi.emailservice.service.EmailSenderService;
+import pl.dudi.emailservice.service.impl.EmailSenderService;
 
 @Slf4j
 @Service
@@ -24,10 +25,14 @@ public class MessageListener {
 
     @RabbitListener(queues = {"${rabbitmq.queue.order.email.name}"})
     public String consumeOrderServiceEmailMessage(CustomerOrderMessage message) {
-        // TODO create email body
         emailSenderService.sendEmail(message.customer().getEmail(), IssuedOrderEmailTemplate.emailBody, IssuedOrderEmailTemplate.emailSubject);
-        String response = "Email successfully send to your mailbox";
-        return response;
+        return "Email successfully send to your mailbox";
+    }
+    @RabbitListener(queues = {"${rabbitmq.queue.order.email.name}"})
+    public String consumeManagementServiceEmailMessage(InvoiceDto message) {
+        // TODO
+//        emailSenderService.sendEmail();
+        return "Email successfully send to customer's mailbox";
     }
 
 }

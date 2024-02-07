@@ -6,6 +6,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.dudi.managementservice.dto.InvoiceDto;
+import pl.dudi.managementservice.dto.InvoiceRequestDto;
 
 @Slf4j
 @Service
@@ -20,8 +21,8 @@ public class InvoiceProducer {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public InvoiceDto generateInvoice(String orderNumber) {
-
+    public InvoiceDto generateInvoice(InvoiceRequestDto invoiceRequest) {
+        rabbitTemplate.convertSendAndReceive(exchange, managementInvoiceRoutingKey, invoiceRequest);
         return null;
     }
 }
