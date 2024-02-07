@@ -6,3 +6,8 @@ spring:
 
 host:
   apiKey: EVPG5XB.NEFW97H-Z89M3N8-QJMGZY3-8HX6P5Q
+
+temp:
+  invoice:
+#    location: /src/main/resources/tmpinvoices/
+    location: classpath:/src/main/resources/tmpinvoices/
