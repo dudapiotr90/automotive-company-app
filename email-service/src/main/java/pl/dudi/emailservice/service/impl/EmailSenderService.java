@@ -1,4 +1,4 @@
-package pl.dudi.emailservice.service;
+package pl.dudi.emailservice.service.impl;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -11,6 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import pl.dudi.emailservice.service.EmailService;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import java.nio.file.Paths;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class EmailSenderService {
+public class EmailSenderService implements EmailService {
 
     @Value("$(spring.name.username)")
     private String fromMail;
@@ -29,6 +30,7 @@ public class EmailSenderService {
     @Value("$(temp.file.location)")
     private String tempFileCatalog;
 
+    @Override
     public void sendEmail(
         String toEmail,
         String body,
@@ -42,12 +44,13 @@ public class EmailSenderService {
         mailSender.send(mailMessage);
     }
 
+    @Override
     public void sendEmailWithAttachment(
         String toEmail,
         String body,
         String subject,
         MultipartFile attachment
-    ) throws MessagingException, IOException {
+    ) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
@@ -60,16 +63,20 @@ public class EmailSenderService {
         mimeMessageHelper.setSubject(subject);
 
         File attachmentFile = new File(tempFileCatalog + attachment.getName());
-        attachment.transferTo(attachmentFile);
+        try {
+            attachment.transferTo(attachmentFile);
+            FileSystemResource fileSystem
+                = new FileSystemResource(attachmentFile);
 
-        FileSystemResource fileSystem
-            = new FileSystemResource(attachmentFile);
+            mimeMessageHelper.addAttachment(attachment.getName(),fileSystem);
 
-        mimeMessageHelper.addAttachment(attachment.getName(),fileSystem);
+            mailSender.send(mimeMessage);
+            log.info("Message send to [{}]",toEmail);
 
-        mailSender.send(mimeMessage);
-        log.info("Message send to [{}]",toEmail);
-
-        Files.delete(Paths.get(attachmentFile.getAbsolutePath()));
+            Files.delete(Paths.get(attachmentFile.getAbsolutePath()));
+        } catch (IOException e) {
+            log.error("Error occurred while handling multipart file");
+            throw new RuntimeException();
+        }
     }
 }

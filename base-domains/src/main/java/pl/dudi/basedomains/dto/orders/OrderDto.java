@@ -18,4 +18,5 @@ public class OrderDto {
     String status;
     OffsetDateTime cancelTill;
     Set<OrderItemDto> items;
+    int customerCode;
 }

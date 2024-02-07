@@ -15,5 +15,5 @@ public interface AccountServiceAPIClient {
     CustomerDto registerCustomerAccount(@RequestBody CustomerDto customer);
 
     @GetMapping("accounts/customer/{code}")
-    CustomerDto findCustomerAccount(@PathVariable("code") int customerCode);
+    CustomerDto getCustomerDetails(@PathVariable("code") int customerCode);
 }

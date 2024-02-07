@@ -25,5 +25,4 @@ public class InvoiceController {
         InvoiceDto invoiceDto = invoiceService.issueInvoice(orderNumber);
         return ResponseEntity.ok(invoiceDto);
     }
-
 }

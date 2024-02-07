@@ -15,7 +15,7 @@ public interface OrderServiceApiClient {
 
 
     @GetMapping("orders/order/{number}")
-    OrderDto showOrder(@PathVariable("number") String orderNumber);
+    OrderDto getOrder(@PathVariable("number") String orderNumber);
 
     @GetMapping("orders/process")
     List<OrderDto> showOrdersToProcess(@RequestHeader("managerCode") int managerCode,@RequestParam("status") String status);

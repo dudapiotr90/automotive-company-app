@@ -3,7 +3,11 @@ package pl.dudi.managementservice.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.dudi.managementservice.dto.InvoiceDto;
+import pl.dudi.basedomains.dto.CustomerDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
+import pl.dudi.managementservice.dto.*;
+import pl.dudi.managementservice.model.CommonSeller;
+import pl.dudi.managementservice.model.Seller;
 import pl.dudi.managementservice.service.InvoiceService;
 import pl.dudi.managementservice.service.apiclients.AccountServiceApiClient;
 import pl.dudi.managementservice.service.apiclients.OrderServiceApiClient;
@@ -22,10 +26,43 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public InvoiceDto issueInvoice(String orderNumber) {
-        // TODO
+        OrderDto orderDetails = orderServiceApiClient.getOrder(orderNumber);
+        CustomerDto customerDetails = accountServiceApiClient.getCustomerDetails(orderDetails.getCustomerCode());
 
-        InvoiceDto invoiceDto = invoiceProducer.generateInvoice(orderNumber);
+        InvoiceRequestDto invoiceRequest = buildInvoiceRequest(orderDetails, customerDetails);
+
+        InvoiceDto invoiceDto = invoiceProducer.generateInvoice(invoiceRequest);
         emailProducer.sendInvoiceToCustomer(invoiceDto);
         return invoiceDto;
+    }
+
+
+
+    private InvoiceRequestDto buildInvoiceRequest(OrderDto orderDetails, CustomerDto customerDetails) {
+        return buildInvoiceRequest(orderDetails, customerDetails, CommonSeller.defaultSeller());
+    }
+
+    private InvoiceRequestDto buildInvoiceRequest(OrderDto order, CustomerDto customer, Seller seller) {
+        return InvoiceRequestDto.builder()
+            .orderDetails(new OrderDetailsDto(
+                    order.getOrderNumber(),
+                    order.getIssuedDateTime(),
+                    order.getRealizedDateTime(),
+                    order.getItems()
+                )
+            )
+            .customerDetails(new CustomerDetailsDto(
+                    customer.getFullName(),
+                    customer.getEmail()
+                )
+            )
+            .sellerDetails(new SellerDetailsDto(
+                seller.getCompanyName(),
+                seller.getNip(),
+                seller.getEmail(),
+                seller.getPhoneNumber()
+                )
+            )
+            .build();
     }
 }
