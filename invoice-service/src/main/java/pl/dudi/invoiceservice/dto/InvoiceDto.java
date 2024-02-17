@@ -1,12 +1,19 @@
 package pl.dudi.invoiceservice.dto;
 
-import com.itextpdf.layout.Document;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import pl.dudi.invoiceservice.model.Customer;
+import pl.dudi.invoiceservice.model.Issuer;
+import pl.dudi.invoiceservice.model.Receiver;
 
-@NoArgsConstructor
-@AllArgsConstructor
-public class InvoiceDto {
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
-    private Document document;
+public record InvoiceDto(
+    Issuer issuer,
+    Customer customer,
+    Receiver receiver,
+    OffsetDateTime issuedAt,
+    OffsetDateTime completed,
+    String orderNumber,
+    BigDecimal totalAmount
+) {
 }

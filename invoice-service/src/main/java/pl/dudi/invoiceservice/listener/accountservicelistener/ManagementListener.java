@@ -17,7 +17,7 @@ public class ManagementListener {
 
     @RabbitListener(queues = {"${rabbitmq.queue.management.invoice.name}"})
     public InvoiceDto consumeInvoiceRequest(InvoiceRequestDto request) {
-        InvoiceDto invoiceDto = invoiceService.generateInvoice(request);
+        InvoiceDto invoiceDto = invoiceService.processInvoice(request);
         return invoiceDto;
     }
 
