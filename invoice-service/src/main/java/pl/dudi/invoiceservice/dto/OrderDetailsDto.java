@@ -14,6 +14,7 @@ import java.util.Set;
 public class OrderDetailsDto {
 
     String orderNumber;
+    String customerComment;
     OffsetDateTime issuedDateTime;
     OffsetDateTime realizedDateTime;
     Set<OrderItemDto> items;

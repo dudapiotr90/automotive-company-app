@@ -12,4 +12,11 @@ public class SellerDetailsDto {
     private String nip;
     private String phoneNumber;
     private String email;
+
+    public String printSeller() {
+        return companyName + System.lineSeparator()
+            + nip + System.lineSeparator()
+            + phoneNumber + System.lineSeparator()
+            + email;
+    }
 }

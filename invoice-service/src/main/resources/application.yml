@@ -11,3 +11,5 @@ temp:
   invoice:
 #    location: /src/main/resources/tmpinvoices/
     location: classpath:/src/main/resources/tmpinvoices/
+file:
+  logo: classpath:/src/main/resources/static/images/logo.png

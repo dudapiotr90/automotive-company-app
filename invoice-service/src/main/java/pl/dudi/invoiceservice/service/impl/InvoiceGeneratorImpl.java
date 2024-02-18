@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pl.dudi.invoiceservice.dto.InvoiceDto;
 import pl.dudi.invoiceservice.dto.InvoiceRequestDto;
+import pl.dudi.invoiceservice.infrastructure.dao.InvoiceDao;
+import pl.dudi.invoiceservice.infrastructure.entity.InvoiceEntity;
 import pl.dudi.invoiceservice.service.*;
 
 import java.io.FileNotFoundException;
@@ -36,6 +38,7 @@ public class InvoiceGeneratorImpl implements InvoiceGenerator{
     private final InvoiceCommentsGenerator invoiceCommentsGenerator;
     private final InvoiceSignGeneratorImpl invoiceSignGenerator;
 
+
     @Value("$(temp.invoice.location)")
     private String tempInvoiceCatalog;
 
@@ -44,15 +47,19 @@ public class InvoiceGeneratorImpl implements InvoiceGenerator{
         Document document = null;
         try {
             document = preparePdfDocument(request);
+            invoiceTitleGenerator.prepareInvoiceTitle(document,invoice);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Problems generating pdf");
         } catch (IOException e) {
-            throw new RuntimeException("Couldn't create catalog");
+            throw new RuntimeException("Couldn't create a resource");
         }
+        invoiceInfoGenerator.prepareInfoSection(request, document);
+        invoiceItemListGenerator.prepareProductList(document, request.getOrderDetailsDto());
+        invoiceSummaryGenerator.prepareSummary(document, invoice);
+        invoiceCommentsGenerator.prepareComments(document, request.getOrderDetailsDto());
+        invoiceSignGenerator.addSign(document);
 
-        invoiceTitleGenerator.prepareInvoiceTitle(document);
-        invoiceInfoGenerator.prepareInfoSection(request,document);
-
+        document.close();
         return document;
     }
 

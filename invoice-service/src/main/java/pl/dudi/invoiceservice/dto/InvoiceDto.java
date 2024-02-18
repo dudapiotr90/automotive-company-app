@@ -14,6 +14,8 @@ public record InvoiceDto(
     OffsetDateTime issuedAt,
     OffsetDateTime completed,
     String orderNumber,
+    String invoiceNumber,
+    BigDecimal allItems,
     BigDecimal totalAmount
 ) {
 }
