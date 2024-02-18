@@ -46,6 +46,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         return InvoiceRequestDto.builder()
             .orderDetails(new OrderDetailsDto(
                     order.getOrderNumber(),
+                    order.getComment(),
                     order.getIssuedDateTime(),
                     order.getRealizedDateTime(),
                     order.getItems()
@@ -57,10 +58,10 @@ public class InvoiceServiceImpl implements InvoiceService {
                 )
             )
             .sellerDetails(new SellerDetailsDto(
-                seller.getCompanyName(),
-                seller.getNip(),
-                seller.getEmail(),
-                seller.getPhoneNumber()
+                    seller.getCompanyName(),
+                    seller.getNip(),
+                    seller.getEmail(),
+                    seller.getPhoneNumber()
                 )
             )
             .build();
