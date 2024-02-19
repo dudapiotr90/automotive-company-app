@@ -12,7 +12,7 @@ import com.itextpdf.layout.properties.TextAlignment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.dudi.invoiceservice.dto.InvoiceDto;
+import pl.dudi.invoiceservice.model.Invoice;
 import pl.dudi.invoiceservice.service.InvoiceTitleGenerator;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class InvoiceTitleGeneratorImpl implements InvoiceTitleGenerator {
     private String logo;
 
     @Override
-    public Document prepareInvoiceTitle(Document document, InvoiceDto invoice) throws IOException {
+    public Document prepareInvoiceTitle(Document document, Invoice invoice) throws IOException {
         float[] columnWidths = {0.67f * PAGE_WIDTH, 0.33f * PAGE_WIDTH};
         Table table = new Table(columnWidths);
         ImageData png = createLogo();
@@ -56,7 +56,7 @@ public class InvoiceTitleGeneratorImpl implements InvoiceTitleGenerator {
         return png;
     }
 
-    private Table createNestedTable(InvoiceDto invoice) {
+    private Table createNestedTable(Invoice invoice) {
         Table nestedTable = new Table(new float[]{1, 1}).useAllAvailableWidth();
         nestedTable.addCell(getHeaderTextCell("Invoice number: "));
         nestedTable.addCell(getHeaderTextCellValue(invoice.invoiceNumber()));

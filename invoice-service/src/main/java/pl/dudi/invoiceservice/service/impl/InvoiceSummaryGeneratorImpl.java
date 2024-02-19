@@ -12,15 +12,13 @@ import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 import org.springframework.stereotype.Service;
-import pl.dudi.invoiceservice.dto.InvoiceDto;
+import pl.dudi.invoiceservice.model.Invoice;
 import pl.dudi.invoiceservice.service.InvoiceSummaryGenerator;
-
-import java.math.BigDecimal;
 
 @Service
 public class InvoiceSummaryGeneratorImpl implements InvoiceSummaryGenerator {
     @Override
-    public void prepareSummary(Document document, InvoiceDto invoice) {
+    public void prepareSummary(Document document, Invoice invoice) {
         float[] nestedSplit = {55f, 45f};
         Table nestedTable = new Table(UnitValue.createPercentArray(nestedSplit))
             .setHorizontalAlignment(HorizontalAlignment.RIGHT).setMargins(5, 5, 30, 5);

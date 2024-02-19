@@ -25,17 +25,16 @@ public class InvoiceServiceImpl implements InvoiceService {
     private final EmailProducer emailProducer;
 
     @Override
-    public InvoiceDto issueInvoice(String orderNumber) {
+    public Invoice issueInvoice(String orderNumber) {
         OrderDto orderDetails = orderServiceApiClient.getOrder(orderNumber);
         CustomerDto customerDetails = accountServiceApiClient.getCustomerDetails(orderDetails.getCustomerCode());
 
         InvoiceRequestDto invoiceRequest = buildInvoiceRequest(orderDetails, customerDetails);
 
-        InvoiceDto invoiceDto = invoiceProducer.generateInvoice(invoiceRequest);
-        emailProducer.sendInvoiceToCustomer(invoiceDto);
-        return invoiceDto;
+        Invoice invoice = invoiceProducer.generateInvoice(invoiceRequest);
+        emailProducer.sendInvoiceToCustomer(invoice,customerDetails);
+        return invoice;
     }
-
 
 
     private InvoiceRequestDto buildInvoiceRequest(OrderDto orderDetails, CustomerDto customerDetails) {
@@ -54,7 +53,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             )
             .customerDetails(new CustomerDetailsDto(
                     customer.getFullName(),
-                    customer.getEmail()
+                    customer.getEmail(),
+                    customer.getCustomerCode()
                 )
             )
             .sellerDetails(new SellerDetailsDto(

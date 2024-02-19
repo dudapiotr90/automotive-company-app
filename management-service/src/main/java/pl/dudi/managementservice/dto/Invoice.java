@@ -1,4 +1,4 @@
 package pl.dudi.managementservice.dto;
 
-public class InvoiceDto {
+public record Invoice(byte[] file) {
 }

@@ -28,10 +28,12 @@ public class MessageListener {
         emailSenderService.sendEmail(message.customer().getEmail(), IssuedOrderEmailTemplate.emailBody, IssuedOrderEmailTemplate.emailSubject);
         return "Email successfully send to your mailbox";
     }
-    @RabbitListener(queues = {"${rabbitmq.queue.order.email.name}"})
+
+
+    @RabbitListener(queues = {"${rabbitmq.queue.management.email.name}"})
     public String consumeManagementServiceEmailMessage(InvoiceDto message) {
         // TODO
-//        emailSenderService.sendEmail();
+//        emailSenderService.sendEmailWithAttachment();
         return "Email successfully send to customer's mailbox";
     }
 

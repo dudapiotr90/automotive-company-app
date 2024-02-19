@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.dudi.managementservice.dto.InvoiceDto;
+import pl.dudi.managementservice.dto.Invoice;
 import pl.dudi.managementservice.service.InvoiceService;
 
 @Slf4j
@@ -19,10 +19,10 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
 
     @PostMapping
-    public ResponseEntity<InvoiceDto> issueInvoice(
+    public ResponseEntity<Invoice> issueInvoice(
         @RequestParam("orderNumber") String orderNumber
     ) {
-        InvoiceDto invoiceDto = invoiceService.issueInvoice(orderNumber);
-        return ResponseEntity.ok(invoiceDto);
+        Invoice invoice = invoiceService.issueInvoice(orderNumber);
+        return ResponseEntity.ok(invoice);
     }
 }
