@@ -1,4 +1,7 @@
 package pl.dudi.invoiceservice.model;
 
-public record Customer() {
+public record Customer(
+    String fullName,
+    String email
+) {
 }

@@ -3,6 +3,7 @@ package pl.dudi.invoiceservice.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.dudi.invoiceservice.model.Issuer;
 
 @Data
 @NoArgsConstructor
@@ -12,6 +13,7 @@ public class SellerDetailsDto {
     private String nip;
     private String phoneNumber;
     private String email;
+    private Issuer issuer;
 
     public String printSeller() {
         return companyName + System.lineSeparator()

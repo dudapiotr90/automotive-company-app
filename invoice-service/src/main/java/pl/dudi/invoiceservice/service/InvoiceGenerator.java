@@ -1,9 +1,10 @@
 package pl.dudi.invoiceservice.service;
 
 import com.itextpdf.layout.Document;
-import pl.dudi.invoiceservice.dto.InvoiceDto;
+import pl.dudi.invoiceservice.model.Invoice;
 import pl.dudi.invoiceservice.dto.InvoiceRequestDto;
+import pl.dudi.invoiceservice.model.PdfFile;
 
 public interface InvoiceGenerator {
-    Document generateInvoice(InvoiceRequestDto request, InvoiceDto invoice);
+    PdfFile generateInvoice(InvoiceRequestDto request, Invoice invoice);
 }

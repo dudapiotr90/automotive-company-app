@@ -1,7 +1,7 @@
 package pl.dudi.managementservice.service;
 
-import pl.dudi.managementservice.dto.InvoiceDto;
+import pl.dudi.managementservice.dto.Invoice;
 
 public interface InvoiceService {
-    InvoiceDto issueInvoice(String orderNumber);
+    Invoice issueInvoice(String orderNumber);
 }

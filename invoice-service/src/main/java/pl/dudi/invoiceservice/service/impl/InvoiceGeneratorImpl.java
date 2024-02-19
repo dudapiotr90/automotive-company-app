@@ -8,10 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.dudi.invoiceservice.dto.InvoiceDto;
 import pl.dudi.invoiceservice.dto.InvoiceRequestDto;
-import pl.dudi.invoiceservice.infrastructure.dao.InvoiceDao;
-import pl.dudi.invoiceservice.infrastructure.entity.InvoiceEntity;
+import pl.dudi.invoiceservice.model.Invoice;
+import pl.dudi.invoiceservice.model.PdfFile;
 import pl.dudi.invoiceservice.service.*;
 
 import java.io.FileNotFoundException;
@@ -25,10 +24,10 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class InvoiceGeneratorImpl implements InvoiceGenerator{
+public class InvoiceGeneratorImpl implements InvoiceGenerator {
 
-    private static final String PDF_FORMAT = ".pdf";
-    private static final String CURRENT_MONTH = LocalDate.now().format(DateTimeFormatter.ofPattern("MM_yyyy"));
+    public static final String PDF_FORMAT = ".pdf";
+    public static final String GENERATED = "generated";
 
 
     private final InvoiceTitleGenerator invoiceTitleGenerator;
@@ -38,16 +37,17 @@ public class InvoiceGeneratorImpl implements InvoiceGenerator{
     private final InvoiceCommentsGenerator invoiceCommentsGenerator;
     private final InvoiceSignGeneratorImpl invoiceSignGenerator;
 
-
     @Value("$(temp.invoice.location)")
     private String tempInvoiceCatalog;
 
     @Override
-    public Document generateInvoice(InvoiceRequestDto request, InvoiceDto invoice) {
-        Document document = null;
+    public PdfFile generateInvoice(InvoiceRequestDto request, Invoice invoice) {
+        Document document;
+        Path path;
         try {
-            document = preparePdfDocument(request);
-            invoiceTitleGenerator.prepareInvoiceTitle(document,invoice);
+            path = getInvoicePath(invoice);
+            document = preparePdfDocument(path,invoice);
+            invoiceTitleGenerator.prepareInvoiceTitle(document, invoice);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Problems generating pdf");
         } catch (IOException e) {
@@ -60,15 +60,19 @@ public class InvoiceGeneratorImpl implements InvoiceGenerator{
         invoiceSignGenerator.addSign(document);
 
         document.close();
-        return document;
+        return new PdfFile(document,path);
     }
 
-    private Document preparePdfDocument(InvoiceRequestDto request) throws IOException {
-        Path directory = Files.createDirectories(Paths.get(tempInvoiceCatalog));
-        Path path = Paths.get(tempInvoiceCatalog + request.getCustomerDetailsDto().getFullName() + CURRENT_MONTH);
+    private Document preparePdfDocument(Path path, Invoice invoice) throws IOException {
         PdfWriter pdfWriter = new PdfWriter(path.toString());
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
         pdfDocument.setDefaultPageSize(PageSize.A4);
         return new Document(pdfDocument);
     }
+
+    private Path getInvoicePath(Invoice invoice) throws IOException {
+        Path directory = Files.createDirectories(Paths.get(tempInvoiceCatalog));
+        return Paths.get(tempInvoiceCatalog + invoice.invoiceNumber()+GENERATED+PDF_FORMAT);
+    }
+
 }

@@ -11,6 +11,7 @@ public class CustomerDetailsDto {
 
     private String fullName;
     private String email;
+    private long customerCode;
 
     public String printCustomer() {
         return fullName+System.lineSeparator()+email;
