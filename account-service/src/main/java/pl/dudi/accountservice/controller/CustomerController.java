@@ -25,7 +25,7 @@ public class CustomerController {
 
     }
 
-    @GetMapping("{code}")
+    @GetMapping("/{code}")
     public  ResponseEntity<CustomerDto> getCustomerDetails(
         @PathVariable("code") int customerCode
     ) {

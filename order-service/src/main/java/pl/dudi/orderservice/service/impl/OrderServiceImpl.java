@@ -8,7 +8,6 @@ import pl.dudi.basedomains.dto.CustomerDto;
 import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.basedomains.utils.PageableService;
-import pl.dudi.basedomains.utils.UuidGenerator;
 import pl.dudi.orderservice.dto.OrderRequestDto;
 import pl.dudi.orderservice.dto.OrderResponseMessage;
 import pl.dudi.orderservice.exception.OrderNotFoundException;
@@ -20,6 +19,7 @@ import pl.dudi.orderservice.service.OrderItemService;
 import pl.dudi.orderservice.service.OrderService;
 import pl.dudi.orderservice.service.apiclients.AccountServiceAPIClient;
 import pl.dudi.orderservice.service.producer.EmailProducer;
+import pl.dudi.orderservice.utility.UUIDGenerator;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderDao orderDAO;
     private final OrderMapper orderMapper;
-    private final UuidGenerator generator;
+    private final UUIDGenerator generator;
     private final PageableService pageableService;
     private final OrderItemService orderItemService;
     private final EmailProducer emailProducer;

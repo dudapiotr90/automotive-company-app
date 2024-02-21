@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface OrderJpaRepository extends JpaRepository<OrderEntity,Long> {
 
     // TODO check if works after inserting data
-    Page<OrderEntity> findByCustomerCodeAndRealized(int customerCode, Pageable pageable, boolean realized);
+    Page<OrderEntity> findByCustomerCodeAndStatus(int customerCode, Status status, Pageable pageable);
 
     Optional<OrderEntity> findByOrderNumber(String orderNumber);
 

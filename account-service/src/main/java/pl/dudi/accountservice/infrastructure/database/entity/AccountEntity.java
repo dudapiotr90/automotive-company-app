@@ -23,7 +23,7 @@ public class AccountEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long accountID;
+    private Long accountId;
 
     @Column(unique = true)
     private String email;

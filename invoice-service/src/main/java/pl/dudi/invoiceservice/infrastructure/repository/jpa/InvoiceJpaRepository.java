@@ -6,5 +6,5 @@ import pl.dudi.invoiceservice.infrastructure.entity.InvoiceEntity;
 
 @Repository
 public interface InvoiceJpaRepository extends JpaRepository<InvoiceEntity,Long> {
-    InvoiceEntity findFirstByOrderByIssuedDateTimeDescWhereEmail(String email);
+    InvoiceEntity findFirstByCustomerEmailOrderByIssuedAtDesc(String email);
 }

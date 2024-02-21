@@ -11,6 +11,7 @@ import java.time.OffsetDateTime;
 public class Product {
 
     Long id;
+    String productName;
     String productNumber;
     BigDecimal price;
     Boolean available;

@@ -1,9 +1,9 @@
 package pl.dudi.managementservice.model;
 
-import pl.dudi.managementservice.dto.Invoice;
+import pl.dudi.managementservice.dto.InvoiceDto;
 
 public record EmailDetails(
-    Invoice invoice,
+    InvoiceDto invoice,
     String email
 ) {
 }

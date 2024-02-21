@@ -14,6 +14,6 @@ public class InvoiceRepository implements InvoiceDao {
 
     @Override
     public InvoiceEntity findLastInvoice(String email) {
-        return invoiceJpaRepository.findFirstByOrderByIssuedDateTimeDescWhereEmail(email);
+        return invoiceJpaRepository.findFirstByCustomerEmailOrderByIssuedAtDesc(email);
     }
 }

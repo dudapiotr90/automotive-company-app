@@ -12,4 +12,7 @@ spring:
             clientSecret: eb465322cb6f76920767852d1ec0cc4adfa0e171
             scope:
               - user:email
-
+#
+#
+#
+#    enabled: false

@@ -26,7 +26,7 @@ public class OrderRepository implements OrderDao {
 
     @Override
     public Page<Order> findOrders(int customerCode, Pageable pageRequestDto) {
-        return orderJpaRepository.findByCustomerCodeAndRealized(customerCode,pageRequestDto,true)
+        return orderJpaRepository.findByCustomerCodeAndStatus(customerCode,Status.REALIZED,pageRequestDto)
             .map(orderMapper::mapToOrder);
     }
 

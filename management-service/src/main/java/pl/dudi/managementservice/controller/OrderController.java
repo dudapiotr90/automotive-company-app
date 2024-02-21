@@ -28,7 +28,7 @@ public class OrderController {
 
     @GetMapping("/order")
     public ResponseEntity<List<OrderDto>> showOrdersToProcess(
-        @RequestHeader("managerCode") int managerCode,
+        @RequestHeader("manager-code") int managerCode,     // TODO refactor to extract managerCode form OAuth or JWT
         @RequestParam("status") String status
     ) {
         List<OrderDto> orders = orderService.showOrdersToProcess(managerCode, status);

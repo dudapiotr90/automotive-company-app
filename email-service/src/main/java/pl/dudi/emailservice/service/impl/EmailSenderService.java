@@ -1,6 +1,5 @@
 package pl.dudi.emailservice.service.impl;
 
-import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.dudi.emailservice.service.EmailService;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -37,7 +35,8 @@ public class EmailSenderService implements EmailService {
         String subject
     ) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom(fromMail);
+        mailMessage.setFrom(fromMail);  // TODO check why spring.name.username shows in email and not actual email address
+
         mailMessage.setSubject(subject);
         mailMessage.setText(body);
         mailMessage.setTo(toEmail);
@@ -50,20 +49,20 @@ public class EmailSenderService implements EmailService {
         String body,
         String subject,
         MultipartFile attachment
-    ) throws MessagingException {
-
+    )  {
+        try {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
         MimeMessageHelper mimeMessageHelper
             = new MimeMessageHelper(mimeMessage, true);
 
-        mimeMessageHelper.setFrom("spring.email.from@gmail.com");
-        mimeMessageHelper.setTo(toEmail);
-        mimeMessageHelper.setText(body);
+        mimeMessageHelper.setFrom(fromMail);
         mimeMessageHelper.setSubject(subject);
+        mimeMessageHelper.setText(body);
+        mimeMessageHelper.setTo(toEmail);
 
         File attachmentFile = new File(tempFileCatalog + attachment.getName());
-        try {
+
             attachment.transferTo(attachmentFile);
             FileSystemResource fileSystem
                 = new FileSystemResource(attachmentFile);
@@ -73,10 +72,10 @@ public class EmailSenderService implements EmailService {
             mailSender.send(mimeMessage);
             log.info("Message send to [{}]",toEmail);
 
-            Files.delete(Paths.get(attachmentFile.getAbsolutePath()));
-        } catch (IOException e) {
-            log.error("Error occurred while handling multipart file");
-            throw new RuntimeException();
+            Files.deleteIfExists(Paths.get(attachmentFile.getAbsolutePath()));
+        } catch (Exception e) {
+            log.error("Error occurred while sending message with attachment file");
+            throw new RuntimeException(); // TODO make custom exception
         }
     }
 }

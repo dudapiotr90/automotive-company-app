@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import pl.dudi.basedomains.utils.UuidGenerator;
+import pl.dudi.accountservice.utility.UUIDGenerator;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private final UuidGenerator uuidGenerator;
+    private final UUIDGenerator uuidGenerator;
     private static final Map<Class<?>, HttpStatus> EXCEPTION_STATUS = Map.of(
         ConstraintViolationException.class, HttpStatus.BAD_REQUEST,
         DataIntegrityViolationException.class, HttpStatus.BAD_REQUEST,
