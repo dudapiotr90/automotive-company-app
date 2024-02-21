@@ -10,6 +10,7 @@ import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.orderservice.dto.OrderRequestDto;
 import pl.dudi.orderservice.dto.OrderResponseMessage;
+import pl.dudi.orderservice.model.Status;
 import pl.dudi.orderservice.service.OrderService;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class OrderController {
     @GetMapping("/{customerCode}")
     public ResponseEntity<Page<OrderDto>> getOrderHistory(
         @PathVariable(name = "customerCode") int customerCode,
+        @RequestParam(name="status",required = false) Status status,   // TODO implement status
         @RequestBody PageRequestDto pageRequestDto
     ){
         Page<OrderDto> orders = orderService.getOrders(customerCode, pageRequestDto);

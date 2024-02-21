@@ -2,7 +2,6 @@ package pl.dudi.invoiceservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import pl.dudi.invoiceservice.dto.InvoiceDto;
 import pl.dudi.invoiceservice.dto.InvoiceRequestDto;
@@ -12,13 +11,8 @@ import pl.dudi.invoiceservice.service.InvoiceDetailsService;
 import pl.dudi.invoiceservice.service.InvoiceGenerator;
 import pl.dudi.invoiceservice.service.InvoiceService;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static pl.dudi.invoiceservice.service.impl.InvoiceGeneratorImpl.GENERATED;
 
 @Slf4j
 @Service
@@ -34,14 +28,14 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice invoice = invoiceDetailsService.prepareInvoiceDetails(request);
         PdfFile pdf = invoiceGenerator.generateInvoice(request, invoice);
 
-        return prepareInvoiceDto(pdf);
+        return prepareInvoiceDto(pdf,invoice);
     }
 
-    private static InvoiceDto prepareInvoiceDto(PdfFile pdf) {
+    private static InvoiceDto prepareInvoiceDto(PdfFile pdf, Invoice invoice) {
         byte[] fileAsByteArray;
         try {
             fileAsByteArray = Files.readAllBytes(pdf.path());
-            return new InvoiceDto(fileAsByteArray);
+            return new InvoiceDto(fileAsByteArray,invoice.invoiceNumber());
         } catch (IOException e) {
             log.error("Coping file failed");
             throw new RuntimeException("Couldn't copy file");

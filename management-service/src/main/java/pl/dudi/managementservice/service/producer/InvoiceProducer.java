@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.dudi.managementservice.dto.Invoice;
+import pl.dudi.managementservice.dto.InvoiceDto;
 import pl.dudi.managementservice.dto.InvoiceRequestDto;
 
 @Slf4j
@@ -21,7 +21,7 @@ public class InvoiceProducer {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public Invoice generateInvoice(InvoiceRequestDto invoiceRequest) {
-        return (Invoice) rabbitTemplate.convertSendAndReceive(exchange, managementInvoiceRoutingKey, invoiceRequest);
+    public InvoiceDto generateInvoice(InvoiceRequestDto invoiceRequest) {
+        return (InvoiceDto) rabbitTemplate.convertSendAndReceive(exchange, managementInvoiceRoutingKey, invoiceRequest);
     }
 }

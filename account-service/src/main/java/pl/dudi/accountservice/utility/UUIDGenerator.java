@@ -1,13 +1,13 @@
-package pl.dudi.basedomains.utils;
+package pl.dudi.accountservice.utility;
 
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
-public class UuidGenerator {
+@NoArgsConstructor
+public class UUIDGenerator {
 
     public String generateUuid() {
         return UUID.randomUUID().toString();

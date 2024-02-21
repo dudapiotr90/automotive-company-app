@@ -12,10 +12,10 @@ import pl.dudi.basedomains.dto.EmailMessage;
 @RequiredArgsConstructor
 public class EmailProducer {
 
-    @Value("${rabbitmq.exchange.email.name}")
+    @Value("${rabbitmq.exchange.account.name}")
     private String exchange;
 
-    @Value("${rabbitmq.binding.email.routing.key}")
+    @Value("${rabbitmq.binding.account.email.routing.key}")
     private String emailRoutingKey;
 
     private final RabbitTemplate rabbitTemplate;

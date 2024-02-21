@@ -1,4 +1,7 @@
 package pl.dudi.emailservice.dto;
 
-public record InvoiceDto(byte[] attachment) {
+public record InvoiceDto(
+    byte[] attachment,
+    String invoiceNumber
+) {
 }

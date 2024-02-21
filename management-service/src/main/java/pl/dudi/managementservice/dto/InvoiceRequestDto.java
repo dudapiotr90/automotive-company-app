@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 public class InvoiceRequestDto {
 
-    private CustomerDetailsDto customerDetails;
-    private OrderDetailsDto orderDetails;
-    private SellerDetailsDto sellerDetails;
+    private CustomerDetailsDto customerDetailsDto;
+    private OrderDetailsDto orderDetailsDto;
+    private SellerDetailsDto sellerDetailsDto;
 }

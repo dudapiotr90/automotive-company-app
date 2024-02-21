@@ -3,3 +3,9 @@ spring:
     name: production-service
   config:
     import: optional:configserver:http://localhost:8085
+
+#logging:
+#  level:
+#    org:
+#      hibernate: debug
+#      springframework: debug

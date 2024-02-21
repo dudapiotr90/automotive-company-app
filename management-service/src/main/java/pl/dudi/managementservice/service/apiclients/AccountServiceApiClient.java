@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.dudi.basedomains.dto.CustomerDto;
 import pl.dudi.managementservice.configuration.feign.FeignClientConfig;
-import pl.dudi.managementservice.dto.Invoice;
+import pl.dudi.managementservice.dto.InvoiceDto;
 import pl.dudi.managementservice.dto.InvoiceRequestDto;
 
 @FeignClient(name="customer-service",configuration = FeignClientConfig.class)
 public interface AccountServiceApiClient {
 
     @PostMapping("/invoice")
-    Invoice issueInvoice(@RequestBody InvoiceRequestDto invoiceRequestDto);
+    InvoiceDto issueInvoice(@RequestBody InvoiceRequestDto invoiceRequestDto);
 
 
     @GetMapping("accounts/customer/{code}")

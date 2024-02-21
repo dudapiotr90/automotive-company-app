@@ -9,7 +9,7 @@ import pl.dudi.accountservice.model.Account;
 import pl.dudi.accountservice.model.Customer;
 import pl.dudi.accountservice.service.RegistrationService;
 import pl.dudi.accountservice.utility.Authorities;
-import pl.dudi.accountservice.utility.UuidGenerator;
+import pl.dudi.accountservice.utility.UUIDGenerator;
 import pl.dudi.basedomains.dto.CustomerDto;
 
 import java.time.OffsetDateTime;
@@ -21,7 +21,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final CustomerDAO customerDAO;
     private final CustomerMapper customerMapper;
     private final PasswordEncoder encoder;
-    private final UuidGenerator generator;
+    private final UUIDGenerator generator;
     @Override
     public CustomerDto registerCustomer(CustomerDto customerDto) {
         Customer customer = buildCustomer(customerDto);
@@ -39,7 +39,6 @@ public class RegistrationServiceImpl implements RegistrationService {
         return Customer.builder()
             .fullName(customerDto.getFullName())
             .customerCode(customerDto.getCustomerCode())
-            .email(customerDto.getEmail())
             .account(Account.builder()
                 .email(customerDto.getEmail())
                 .login(customerDto.getLogin())

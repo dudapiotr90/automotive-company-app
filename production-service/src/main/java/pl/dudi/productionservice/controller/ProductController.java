@@ -15,13 +15,13 @@ import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/production")
+@RequestMapping("/product")
 public class ProductController {
 
     private final ProductService productService;
 
 
-    @PostMapping("/product")
+    @PostMapping
     @PreAuthorize("hasRole('DESIGNER') || hasRole('MANAGER')")
     public ResponseEntity<String> addProductToCatalog(
         @RequestBody ProductDto productDto
@@ -30,7 +30,7 @@ public class ProductController {
         return new ResponseEntity<>(productNumber, HttpStatus.CREATED);
     }
 
-    @PostMapping("/product/all")
+    @PostMapping("/all")
     @PreAuthorize("hasRole('DESIGNER') || hasRole('MANAGER')")
     public ResponseEntity<Set<String>> addProductsToCatalog(
         @RequestBody ProductsDto productsDto
@@ -39,14 +39,14 @@ public class ProductController {
         return new ResponseEntity<>(productNumbers, HttpStatus.CREATED);
     }
 
-    @GetMapping("/product/{productNumber}")
+    @GetMapping("/{productNumber}")
     public ResponseEntity<ProductDto> getProduct(
         @PathVariable(name = "productCode") String productNumber
     ) {
         ProductDto product = productService.getProduct(productNumber);
         return ResponseEntity.ok(product);
     }
-    @GetMapping("/product/all")
+    @GetMapping("/all")
     public ResponseEntity<Page<ProductDto>> getProducts(
         @RequestParam(required = false, name = "pageNumber") Integer pageNumber,
         @RequestParam(required = false, name = "pageSize") Integer pageSize,
