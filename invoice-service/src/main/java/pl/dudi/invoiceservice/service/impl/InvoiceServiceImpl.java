@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.dudi.invoiceservice.dto.InvoiceDto;
 import pl.dudi.invoiceservice.dto.InvoiceRequestDto;
+import pl.dudi.invoiceservice.infrastructure.dao.InvoiceDao;
+import pl.dudi.invoiceservice.infrastructure.entity.InvoiceEntity;
+import pl.dudi.invoiceservice.mapper.InvoiceMapper;
 import pl.dudi.invoiceservice.model.Invoice;
 import pl.dudi.invoiceservice.model.PdfFile;
 import pl.dudi.invoiceservice.service.InvoiceDetailsService;
@@ -20,25 +23,19 @@ import java.nio.file.Files;
 public class InvoiceServiceImpl implements InvoiceService {
 
 
-    private final InvoiceGenerator invoiceGenerator;
+
+    private final InvoiceDao invoiceDao;
     private final InvoiceDetailsService invoiceDetailsService;
+    private final InvoiceMapper invoiceMapper;
 
     @Override
-    public InvoiceDto processInvoice(InvoiceRequestDto request) {
-        Invoice invoice = invoiceDetailsService.prepareInvoiceDetails(request);
-        PdfFile pdf = invoiceGenerator.generateInvoice(request, invoice);
+    public Invoice issueInvoice(InvoiceRequestDto request) {
+        InvoiceEntity lastInvoice = invoiceDao.findLastInvoice(request.getCustomerDetailsDto().getEmail());
+        Invoice invoice = invoiceDetailsService.prepareInvoiceDetails(request,lastInvoice);
+        invoiceDao.saveInvoice(invoiceMapper.mapToEntity(invoice));
 
-        return prepareInvoiceDto(pdf,invoice);
+        return invoice;
     }
 
-    private static InvoiceDto prepareInvoiceDto(PdfFile pdf, Invoice invoice) {
-        byte[] fileAsByteArray;
-        try {
-            fileAsByteArray = Files.readAllBytes(pdf.path());
-            return new InvoiceDto(fileAsByteArray,invoice.invoiceNumber());
-        } catch (IOException e) {
-            log.error("Coping file failed");
-            throw new RuntimeException("Couldn't copy file");
-        }
-    }
+
 }

@@ -25,7 +25,7 @@ public class OrderItemEntity {
     private String productCode;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_number")
     private OrderEntity order;
 
 }

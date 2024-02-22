@@ -20,5 +20,6 @@ public class Product {
     OffsetDateTime creationDate;
     Photo photo;
     String designerCode;
+    int averageOpinion;
 
 }

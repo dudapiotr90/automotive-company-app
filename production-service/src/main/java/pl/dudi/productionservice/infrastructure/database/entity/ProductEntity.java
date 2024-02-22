@@ -31,9 +31,8 @@ public class ProductEntity {
     private Boolean inProduction;
     private String description;
     private OffsetDateTime creationDate;
-//    private Photo photo;
     private String designerCode;
-    private BigDecimal averageOpinion;
+    private int averageOpinion;
 
     @OneToMany(mappedBy = "product")
     private Set<OpinionEntity> opinions;

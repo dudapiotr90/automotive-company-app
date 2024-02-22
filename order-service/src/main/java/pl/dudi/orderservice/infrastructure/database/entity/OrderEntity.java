@@ -13,14 +13,14 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long orderId;
 
     private String orderNumber;
     private OffsetDateTime issuedDateTime;

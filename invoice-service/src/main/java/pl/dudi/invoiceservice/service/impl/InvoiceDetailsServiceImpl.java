@@ -26,18 +26,18 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     private final InvoiceDao invoiceDao;
     @Override
-    public Invoice prepareInvoiceDetails(InvoiceRequestDto request) {
-        InvoiceEntity lastInvoice = invoiceDao.findLastInvoice(request.getCustomerDetailsDto().getEmail());
+    public Invoice prepareInvoiceDetails(InvoiceRequestDto request, InvoiceEntity invoice) {
+
 
         return new Invoice(
-            request.getSellerDetailsDto().getIssuer(),
             getCustomer(request.getCustomerDetailsDto()),
             request.getOrderDetailsDto().getIssuedDateTime(),
             OffsetDateTime.now(),
             request.getOrderDetailsDto().getOrderNumber(),
-            generateInvoiceNumber(lastInvoice,request.getCustomerDetailsDto()),
+            generateInvoiceNumber(invoice,request.getCustomerDetailsDto()),
             getAllItems(request.getOrderDetailsDto()),
-            getTotalAmount(request.getOrderDetailsDto())
+            getTotalAmount(request.getOrderDetailsDto()),
+            request.getSellerDetailsDto().getIssuer()
         );
     }
 
@@ -46,7 +46,9 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     }
 
     private String generateInvoiceNumber(InvoiceEntity lastInvoice, CustomerDetailsDto customerDetailsDto) {
-        return INV_TEMPLATE.formatted(customerDetailsDto.getCustomerCode(),lastInvoice.getInvoiceId()+1);
+        String[] invoiceNumberComponents = lastInvoice.getInvoiceNumber().split("_");
+        int invoiceForCustomer = Integer.parseInt(invoiceNumberComponents[2]);
+        return INV_TEMPLATE.formatted(customerDetailsDto.getCustomerCode(),invoiceForCustomer+1);
     }
 
     private BigDecimal getAllItems(OrderDetailsDto orderDetailsDto) {

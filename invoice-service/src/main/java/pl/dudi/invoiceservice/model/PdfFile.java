@@ -4,5 +4,8 @@ import com.itextpdf.layout.Document;
 
 import java.nio.file.Path;
 
-public record PdfFile(Document document, Path path) {
+public record PdfFile(
+    Document document,
+    Path path
+) {
 }
