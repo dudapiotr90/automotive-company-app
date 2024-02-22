@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: invoice-service
+  config:
+    import: optional:configserver:http://localhost:8085
+
+host:
+  apiKey: ${api_key}

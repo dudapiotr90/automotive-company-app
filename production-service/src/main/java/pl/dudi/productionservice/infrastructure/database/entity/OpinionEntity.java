@@ -13,7 +13,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "opinions")
+@Table(name = "opinion")
 public class OpinionEntity {
 
     @Id
@@ -25,6 +25,6 @@ public class OpinionEntity {
     private OffsetDateTime issuedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_number")
     private ProductEntity product;
 }

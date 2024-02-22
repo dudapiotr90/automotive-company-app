@@ -16,4 +16,9 @@ public class InvoiceRepository implements InvoiceDao {
     public InvoiceEntity findLastInvoice(String email) {
         return invoiceJpaRepository.findFirstByCustomerEmailOrderByIssuedAtDesc(email);
     }
+
+    @Override
+    public InvoiceEntity saveInvoice(InvoiceEntity invoice) {
+        return invoiceJpaRepository.save(invoice);
+    }
 }
