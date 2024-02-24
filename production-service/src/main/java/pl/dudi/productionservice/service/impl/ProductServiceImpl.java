@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
     public String addProduct(ProductDto productDto) {
         Product product = createProductDetails(productDto);
         Product saved = productDao.saveProduct(product);
-        return saved.getProductNumber();
+        return saved.getProductCode();
     }
 
     @Override
@@ -38,13 +38,13 @@ public class ProductServiceImpl implements ProductService {
             .collect(Collectors.toSet());
         Set<Product> savedProducts = productDao.saveProducts(products);
         return savedProducts.stream()
-            .map(Product::getProductNumber)
+            .map(Product::getProductCode)
             .collect(Collectors.toSet());
     }
 
     @Override
     public ProductDto getProduct(String productNumber) {
-        Product product = productDao.findByProductNumber(productNumber);
+        Product product = productDao.findByProductCode(productNumber);
         return productMapper.mapToProductDto(product);
     }
 
@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
 
     private Product createProductDetails(ProductDto productDto) {
         return Product.builder()
-            .productNumber(productDto.getProductNumber())
+            .productCode(productDto.getProductNumber())
             .available(false)
             .inProduction(false)
             .description(productDto.getDescription())

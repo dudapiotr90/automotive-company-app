@@ -21,7 +21,7 @@ public class OpinionServiceImpl implements OpinionService {
     private final ProductDao productDao;
     @Override
     public String submitOpinion(OpinionRequestDto opinionRequest) {
-        Product product = productDao.findByProductNumber(opinionRequest.productNumber());
+        Product product = productDao.findByProductCode(opinionRequest.productNumber());
         Opinion opinion = opinionDao.saveOpinion( buildOpinion(product, opinionRequest));
         return "Opinion submitted to product: [%s]".formatted(product.getProductName());
     }

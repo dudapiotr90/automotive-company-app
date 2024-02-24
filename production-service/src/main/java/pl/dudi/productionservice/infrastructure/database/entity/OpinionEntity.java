@@ -25,6 +25,6 @@ public class OpinionEntity {
     private OffsetDateTime issuedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_number")
+    @JoinColumn(name = "product_code")
     private ProductEntity product;
 }

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS orders
     issued_date_time            TIMESTAMP                       NOT NULL,
     realized_date_time          TIMESTAMP,
     comment                     TEXT,
-    customer_code               int                             NOT NULL            UNIQUE,
+    customer_code               int                             NOT NULL,
     status                      VARCHAR(32)                     NOT NULL,
     cancel_till                 TIMESTAMP                       NOT NULL
 );
