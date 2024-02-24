@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS product
 (
     id                                      SERIAL                          PRIMARY KEY,
     product_name                            VARCHAR(64)                     NOT NULL,
-    product_number                          VARCHAR(64)                     NOT NULL        UNIQUE,
+    product_code                          VARCHAR(64)                     NOT NULL        UNIQUE,
     price                                   NUMERIC(7,2)                    NOT NULL,
     available                               BOOLEAN                         NOT NULL,
     in_production                           BOOLEAN                         NOT NULL,
