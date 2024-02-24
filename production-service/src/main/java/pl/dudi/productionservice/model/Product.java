@@ -12,7 +12,7 @@ public class Product {
 
     Long id;
     String productName;
-    String productNumber;
+    String productCode;
     BigDecimal price;
     Boolean available;
     Boolean inProduction;

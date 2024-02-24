@@ -4,8 +4,8 @@ CREATE TABLE IF NOT EXISTS opinion
     comment                   TEXT,
     score                     INT                   NOT NULL,
     issued_at                 TIMESTAMP             NOT NULL,
-    product_number            VARCHAR(64)           NOT NULL,
+    product_code            VARCHAR(64)           NOT NULL,
     CONSTRAINT fk_opinion_product
-        FOREIGN KEY (product_number)
-            REFERENCES product (product_number)
+        FOREIGN KEY (product_code)
+            REFERENCES product (product_code)
 );

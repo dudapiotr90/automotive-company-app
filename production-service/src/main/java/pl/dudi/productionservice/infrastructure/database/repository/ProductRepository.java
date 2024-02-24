@@ -49,9 +49,9 @@ public class ProductRepository implements ProductDao {
     }
 
     @Override
-    public Product findByProductNumber(String productNumber) {
-        return productJpaRepository.findByProductNumber(productNumber)
+    public Product findByProductCode(String productCode) {
+        return productJpaRepository.findByProductCode(productCode)
             .map(productMapper::mapToProduct)
-            .orElseThrow(() -> new EntityNotFoundException(String.format("Product %s doesn't exist",productNumber)));
+            .orElseThrow(() -> new EntityNotFoundException(String.format("Product %s doesn't exist",productCode)));
     }
 }

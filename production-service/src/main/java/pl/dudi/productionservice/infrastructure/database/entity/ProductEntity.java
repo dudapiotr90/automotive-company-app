@@ -25,7 +25,7 @@ public class ProductEntity {
     private Long id;
 
     private String productName;
-    private String productNumber;
+    private String productCode;
     private BigDecimal price;
     private Boolean available;
     private Boolean inProduction;
