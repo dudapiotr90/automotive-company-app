@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrderDao {
-    Page<Order> findOrders(int customerCode, Pageable pageable);
+    Page<Order> findOrders(int customerCode, Pageable pageable, Status status);
 
     Order addOrderToProcess(int customerDto, Order order);
 

@@ -29,7 +29,7 @@ public class EmailSenderService implements EmailService {
     private String tempFileCatalog;
 
     @Override
-    public void sendEmail(
+    public String sendEmail(
         String toEmail,
         String body,
         String subject
@@ -41,10 +41,11 @@ public class EmailSenderService implements EmailService {
         mailMessage.setText(body);
         mailMessage.setTo(toEmail);
         mailSender.send(mailMessage);
+        return CONFIRMATION_MESSAGE;
     }
 
     @Override
-    public void sendEmailWithAttachment(
+    public String sendEmailWithAttachment(
         String toEmail,
         String body,
         String subject,
@@ -77,5 +78,6 @@ public class EmailSenderService implements EmailService {
             log.error("Error occurred while sending message with attachment file");
             throw new RuntimeException(); // TODO make custom exception
         }
+        return CONFIRMATION_MESSAGE;
     }
 }

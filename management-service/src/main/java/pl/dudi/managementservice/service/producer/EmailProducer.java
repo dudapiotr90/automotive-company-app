@@ -14,18 +14,14 @@ import pl.dudi.managementservice.model.EmailDetails;
 @RequiredArgsConstructor
 public class EmailProducer {
 
+    private final RabbitTemplate rabbitTemplate;
     @Value("${rabbitmq.exchange.management.name}")
     private String exchange;
-
     @Value("${rabbitmq.binding.management.email.routing.key}")
     private String managementEmailRoutingKey;
 
-    private final RabbitTemplate rabbitTemplate;
-
-
-    public String sendInvoiceToCustomer(InvoiceDto invoice, CustomerDto customerDetails) {
+    public void sendInvoiceToCustomer(InvoiceDto invoice, CustomerDto customerDetails) {
         EmailDetails emailDetails = new EmailDetails(invoice, customerDetails.getEmail());
-        rabbitTemplate.convertSendAndReceive(exchange, managementEmailRoutingKey, emailDetails);
-        return null; // TODO
+        Object response = rabbitTemplate.convertSendAndReceive(exchange, managementEmailRoutingKey, emailDetails);
     }
 }

@@ -14,15 +14,11 @@ import pl.dudi.basedomains.dto.CustomerDto;
 public class CustomerController {
 
     private final RegistrationService registrationService;
-    private final EmailProducer emailProducer;
 
     @PostMapping
     public ResponseEntity<CustomerDto> registerCustomer(@RequestBody CustomerDto customer) {
         CustomerDto customerDto = registrationService.registerCustomer(customer);
-//        emailProducer.sendEmail();
-        // TODO implement EmailProducer with rabbitmq and docker
         return new ResponseEntity<>(customerDto, HttpStatus.CREATED);
-
     }
 
     @GetMapping("/{code}")

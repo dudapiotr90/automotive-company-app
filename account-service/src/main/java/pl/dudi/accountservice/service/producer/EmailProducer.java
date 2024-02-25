@@ -22,15 +22,6 @@ public class EmailProducer {
 
     public void sendRegistrationConfirmationEmail(EmailMessage emailMessage) {
         log.info(String.format("Confirmation email sent to RabbitMQ --> %s",emailMessage));
-
-
-//        Message message = rabbitTemplate.getMessageConverter().toMessage(emailMessage, new MessageProperties());
-//        message.getMessageProperties().setHeaders(headers);
-
-        rabbitTemplate.convertAndSend(exchange,emailRoutingKey,emailMessage);
-//        rabbitTemplate.send(exchange,emailRoutingKey,emailMessage);
-
-
-        //
+        rabbitTemplate.convertSendAndReceive(exchange, emailRoutingKey, emailMessage); // TODO add message if sending email fails
     }
 }

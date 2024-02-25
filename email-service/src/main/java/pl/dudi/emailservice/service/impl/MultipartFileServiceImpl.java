@@ -8,7 +8,6 @@ import pl.dudi.emailservice.model.PdfMultipartFile;
 import pl.dudi.emailservice.service.MultipartFileService;
 
 @Service
-@RequiredArgsConstructor
 public class MultipartFileServiceImpl implements MultipartFileService {
     @Override
     public MultipartFile createMultipartFile(InvoiceDto invoice) {

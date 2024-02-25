@@ -24,25 +24,23 @@ public class MessageListener {
     private final MultipartFileService multipartFileService;
     private final EmailTemplateService emailTemplateService;
 
-//    @RabbitListener(queues = {"${rabbitmq.queue.account.email.name}"})
-//    public void consumeAccountServiceEmailMessage(EmailMessage message) {
-//        emailSenderService.sendEmail(message.toEmail(), message.body(), message.subject());
-//    }
-//
-//
-//    @RabbitListener(queues = {"${rabbitmq.queue.order.email.name}"})
-//    public String consumeOrderServiceEmailMessage(CustomerOrderMessage message) {
-//        emailSenderService.sendEmail(message.customer().getEmail(), IssuedOrderEmailTemplate.emailBody, IssuedOrderEmailTemplate.emailSubject);
-//        return "Email successfully send to your mailbox";
-//    }
+    @RabbitListener(queues = {"${rabbitmq.queue.account.email.name}"})
+    public String consumeAccountServiceEmailMessage(EmailMessage message) {
+        return emailSenderService.sendEmail(message.toEmail(), message.body(), message.subject());
+    }
+    @RabbitListener(queues = {"${rabbitmq.queue.order.email.name}"})
+    public String consumeOrderServiceEmailMessage(CustomerOrderMessage message) {
+        return emailSenderService
+            .sendEmail(message.customer().getEmail(), IssuedOrderEmailTemplate.emailBody, IssuedOrderEmailTemplate.emailSubject);
+    }
 
 
     @RabbitListener(queues = {"${rabbitmq.queue.management.email.name}"})
     public String consumeManagementServiceEmailMessage(EmailDetails message) throws MessagingException {
         MultipartFile attachment = multipartFileService.createMultipartFile(message.invoice());
         EmailTemplate emailTemplate = emailTemplateService.getInvoiceTemplate();
-        emailSenderService.sendEmailWithAttachment(message.email(),emailTemplate.body(),emailTemplate.subject(),attachment);
-        return "Email successfully send to customer's mailbox";
+        return emailSenderService
+            .sendEmailWithAttachment(message.email(),emailTemplate.body(),emailTemplate.subject(),attachment);
     }
 
 }

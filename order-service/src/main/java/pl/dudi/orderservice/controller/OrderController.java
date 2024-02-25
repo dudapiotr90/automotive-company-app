@@ -26,10 +26,10 @@ public class OrderController {
     @GetMapping("/{customerCode}")
     public ResponseEntity<Page<OrderDto>> getOrderHistory(
         @PathVariable(name = "customerCode") int customerCode,
-        @RequestParam(name="status",required = false) Status status,   // TODO implement status
+        @RequestParam(name="status",required = false) Status status,
         @RequestBody PageRequestDto pageRequestDto
     ){
-        Page<OrderDto> orders = orderService.getOrders(customerCode, pageRequestDto);
+        Page<OrderDto> orders = orderService.getOrders(customerCode, pageRequestDto,status);
         return ResponseEntity.ok(orders);
     }
 
