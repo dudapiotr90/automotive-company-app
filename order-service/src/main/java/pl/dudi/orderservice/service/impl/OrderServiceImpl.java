@@ -39,9 +39,9 @@ public class OrderServiceImpl implements OrderService {
     private final AccountServiceAPIClient accountServiceAPIClient;
 
     @Override
-    public Page<OrderDto> getOrders(int customerCode, PageRequestDto pageRequestDto) {
+    public Page<OrderDto> getOrders(int customerCode, PageRequestDto pageRequestDto, Status status) {
         Pageable pageable = pageableService.preparePageable(DEFAULT_ORDER_HISTORY_REQUEST, pageRequestDto);
-        Page<Order> orders = orderDAO.findOrders(customerCode, pageable);
+        Page<Order> orders = orderDAO.findOrders(customerCode, pageable,status);
         return orders.map(orderMapper::mapToOrderDto);
     }
 

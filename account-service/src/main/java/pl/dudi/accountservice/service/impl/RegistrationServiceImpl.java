@@ -22,10 +22,12 @@ public class RegistrationServiceImpl implements RegistrationService {
     private final CustomerMapper customerMapper;
     private final PasswordEncoder encoder;
     private final UUIDGenerator generator;
+    private final EmailServiceImpl emailService;
     @Override
     public CustomerDto registerCustomer(CustomerDto customerDto) {
         Customer customer = buildCustomer(customerDto);
         Customer savedCustomer = customerDAO.addCustomerToDatabase(customer);
+        emailService.sendConfirmationEmail(savedCustomer);
         return customerMapper.mapToCustomerDto(savedCustomer);
     }
 

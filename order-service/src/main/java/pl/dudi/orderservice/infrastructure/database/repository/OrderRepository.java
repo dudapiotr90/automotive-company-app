@@ -13,6 +13,7 @@ import pl.dudi.orderservice.model.Order;
 import pl.dudi.orderservice.model.Status;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -25,8 +26,11 @@ public class OrderRepository implements OrderDao {
 
 
     @Override
-    public Page<Order> findOrders(int customerCode, Pageable pageRequestDto) {
-        return orderJpaRepository.findByCustomerCodeAndStatus(customerCode,Status.REALIZED,pageRequestDto)
+    public Page<Order> findOrders(int customerCode, Pageable pageRequestDto, Status status) {
+        if (Objects.isNull(status)) {
+            status = Status.REALIZED;
+        }
+        return orderJpaRepository.findByCustomerCodeAndStatus(customerCode,status,pageRequestDto)
             .map(orderMapper::mapToOrder);
     }
 
