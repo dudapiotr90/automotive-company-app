@@ -25,7 +25,7 @@ public class FileServiceImpl implements FileService {
     public void saveInvoice(InvoiceDto invoiceDto) {
         MultipartFile file = multipartFileService.transferToMultipartFile(invoiceDto);
         FileDetailsResponse fileDetailsResponse = hostFileService.sendFileToHosting(file);
-        InvoiceData invoiceData = invoiceDao.saveInvoiceData(buildInvoiceData(fileDetailsResponse));
+        invoiceDao.saveInvoiceData(buildInvoiceData(fileDetailsResponse));
     }
 
     private InvoiceData buildInvoiceData(FileDetailsResponse fileDetailsResponse) {

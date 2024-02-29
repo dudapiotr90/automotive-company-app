@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
 import pl.dudi.fileservice.dto.FileDetailsResponse;
-import pl.dudi.fileservice.dto.InvoiceDto;
 import pl.dudi.fileservice.service.HostFileService;
 
 import java.time.OffsetDateTime;
