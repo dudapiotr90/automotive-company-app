@@ -14,9 +14,14 @@ public class InvoiceListener {
 
     private final FileService fileService;
 
-    @RabbitListener(queues = {"${rabbitmq.queue.management.invoice.name}"})
-    public void consumeInvoices(InvoiceDto invoiceDto) {
+    @RabbitListener(queues = {"${rabbitmq.queue.invoice.file.save}"})
+    public void saveInvoice(InvoiceDto invoiceDto) {
         fileService.saveInvoice(invoiceDto);
+    }
+
+    @RabbitListener(queues = {"${rabbitmq.queue.invoice.file.update}"})
+    public void updateInvoice(InvoiceDto invoiceDto) {
+        fileService.updateInvoice(invoiceDto);
     }
 
 }
