@@ -1,4 +1,4 @@
-package pl.dudi.emailservice.configuration.rabbitmq;
+package pl.dudi.fileservice.infrastructure.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -16,7 +16,6 @@ import org.springframework.retry.interceptor.RetryOperationsInterceptor;
 
 @Configuration
 public class RabbitmqConfig {
-
 
     @Bean
     public MessageConverter jsonConverter(ObjectMapper objectMapper) {
