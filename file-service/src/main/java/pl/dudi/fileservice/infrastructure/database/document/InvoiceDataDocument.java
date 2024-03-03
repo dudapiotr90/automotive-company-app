@@ -23,6 +23,10 @@ public class InvoiceDataDocument {
 
     @Indexed(unique = true)
     private String name;
+
+    @Indexed(unique = true)
+    private String invoiceNumber;
+
     private String link;
     private OffsetDateTime expires;
 }
