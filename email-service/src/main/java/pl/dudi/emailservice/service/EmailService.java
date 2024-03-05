@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface EmailService {
 
-    String CONFIRMATION_MESSAGE = "Email successfully send";
+    String CONFIRMATION_MESSAGE = "Email successfully sent";
     String sendEmail(String toEmail, String body, String subject);
     String sendEmailWithAttachment(String toEmail,String body,String subject,MultipartFile attachment) throws MessagingException;
 

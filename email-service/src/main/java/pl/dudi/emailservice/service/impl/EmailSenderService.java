@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.MailSendException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -76,7 +77,7 @@ public class EmailSenderService implements EmailService {
             Files.deleteIfExists(Paths.get(attachmentFile.getAbsolutePath()));
         } catch (Exception e) {
             log.error("Error occurred while sending message with attachment file");
-            throw new RuntimeException(); // TODO make custom exception
+            throw new MailSendException("Unable to send email");
         }
         return CONFIRMATION_MESSAGE;
     }
