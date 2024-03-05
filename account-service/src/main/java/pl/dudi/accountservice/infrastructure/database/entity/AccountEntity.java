@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.dudi.accountservice.exception.AuthorityException;
 
 import java.time.OffsetDateTime;
 import java.util.Collection;
@@ -44,8 +45,7 @@ public class AccountEntity implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
         if (Objects.isNull(role)) {
-            // TODO make custom exception
-            throw new RuntimeException(String.format("Account [%s] has no authority", this.login));
+            throw new AuthorityException(String.format("Account [%s] has no authority", this.login));
         }
         return Collections.singleton(authority);
     }
