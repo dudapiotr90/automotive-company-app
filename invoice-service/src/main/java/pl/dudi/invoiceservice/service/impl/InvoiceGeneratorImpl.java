@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.dudi.invoiceservice.dto.InvoiceRequestDto;
+import pl.dudi.invoiceservice.dto.request.InvoiceRequestDto;
 import pl.dudi.invoiceservice.model.Invoice;
 import pl.dudi.invoiceservice.model.PdfFile;
 import pl.dudi.invoiceservice.service.*;

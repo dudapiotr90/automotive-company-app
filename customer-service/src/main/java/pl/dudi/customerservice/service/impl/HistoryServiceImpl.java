@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.dudi.basedomains.dto.CustomerDto;
 import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
-import pl.dudi.customerservice.model.InvoiceDto;
+import pl.dudi.customerservice.dto.response.InvoiceDto;
 import pl.dudi.customerservice.service.CustomerService;
 import pl.dudi.customerservice.service.HistoryService;
 import pl.dudi.customerservice.service.apiclient.InvoiceServiceAPIClient;
@@ -32,14 +32,20 @@ public class HistoryServiceImpl implements HistoryService {
     ) {
         PageRequestDto pageRequestDto = new PageRequestDto(pageNumber, pageSize, sortHow, sortBy);
         CustomerDto customerDto = customerService.extractUserData(user);
-        return orderServiceAPIClient.getOrderHistory(customerDto.getCustomerCode(),pageRequestDto);
+        return orderServiceAPIClient.getOrderHistory(customerDto.customerCode(),pageRequestDto);
     }
 
     @Override
-    public Page<InvoiceDto> showInvoiceHistory(OAuth2User user, Integer pageNumber, Integer pageSize, String sortHow, String... sortBy) {
+    public Page<InvoiceDto> showInvoiceHistory(
+        OAuth2User user,
+        Integer pageNumber,
+        Integer pageSize,
+        String sortHow,
+        String... sortBy
+    ) {
         PageRequestDto pageRequestDto = new PageRequestDto(pageNumber, pageSize, sortHow, sortBy);
         CustomerDto customerDto = customerService.extractUserData(user);
 
-        return invoiceServiceAPIClient.getInvoiceHistory(customerDto.getCustomerCode(),pageRequestDto);
+        return invoiceServiceAPIClient.getInvoiceHistory(customerDto.customerCode(),pageRequestDto);
     }
 }

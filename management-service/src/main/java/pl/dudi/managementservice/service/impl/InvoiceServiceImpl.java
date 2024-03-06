@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.dudi.basedomains.dto.CustomerDto;
 import pl.dudi.basedomains.dto.orders.OrderDto;
-import pl.dudi.basedomains.dto.orders.OrderItemDto;
 import pl.dudi.managementservice.dto.*;
 import pl.dudi.managementservice.model.CommonSeller;
 import pl.dudi.managementservice.model.Seller;
@@ -14,10 +13,6 @@ import pl.dudi.managementservice.service.apiclients.AccountServiceApiClient;
 import pl.dudi.managementservice.service.apiclients.OrderServiceApiClient;
 import pl.dudi.managementservice.service.producer.EmailProducer;
 import pl.dudi.managementservice.service.producer.InvoiceProducer;
-
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.Set;
 
 @Slf4j
 @Service
@@ -57,9 +52,9 @@ public class InvoiceServiceImpl implements InvoiceService {
                 )
             )
             .customerDetailsDto(new CustomerDetailsDto(
-                    customer.getFullName(),
-                    customer.getEmail(),
-                    customer.getCustomerCode()
+                    customer.fullName(),
+                    customer.email(),
+                    customer.customerCode()
                 )
             )
             .sellerDetailsDto(new SellerDetailsDto(

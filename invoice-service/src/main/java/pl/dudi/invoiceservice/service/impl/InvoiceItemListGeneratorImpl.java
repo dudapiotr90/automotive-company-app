@@ -10,7 +10,7 @@ import com.itextpdf.layout.properties.UnitValue;
 import com.itextpdf.layout.splitting.DefaultSplitCharacters;
 import org.springframework.stereotype.Service;
 import pl.dudi.basedomains.dto.orders.OrderItemDto;
-import pl.dudi.invoiceservice.dto.OrderDetailsDto;
+import pl.dudi.invoiceservice.dto.request.OrderDetailsDto;
 import pl.dudi.invoiceservice.service.InvoiceItemListGenerator;
 
 import java.util.Set;

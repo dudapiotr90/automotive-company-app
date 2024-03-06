@@ -10,12 +10,18 @@ import pl.dudi.orderservice.model.Status;
 import java.util.List;
 
 public interface OrderService {
+
+    PageRequestDto DEFAULT_ORDER_HISTORY_REQUEST = new PageRequestDto(1, 10, "desc", "issuedDateTime");
     Page<OrderDto> getOrders(int customerCode, PageRequestDto pageRequestDto, Status status);
 
-    OrderResponseMessage processOrder(int customerCode, OrderRequestDto orderRequest);
+    OrderDto processOrder(int customerCode, OrderRequestDto orderRequest);
 
     OrderDto getOrder(String orderNumber);
 
     List<OrderDto> getOrdersToProcess(String status);
+
+    String cancelOrder(String orderNumber);
+
+    void setOrderToProcess();
 
 }

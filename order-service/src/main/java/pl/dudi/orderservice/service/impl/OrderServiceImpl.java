@@ -1,16 +1,16 @@
 package pl.dudi.orderservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.dudi.basedomains.dto.CustomerDto;
-import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
+import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.utils.PageableService;
 import pl.dudi.orderservice.dto.OrderRequestDto;
-import pl.dudi.orderservice.dto.OrderResponseMessage;
-import pl.dudi.orderservice.exception.OrderNotFoundException;
 import pl.dudi.orderservice.infrastructure.database.dao.OrderDao;
 import pl.dudi.orderservice.mapper.OrderMapper;
 import pl.dudi.orderservice.model.Order;
@@ -21,14 +21,14 @@ import pl.dudi.orderservice.service.apiclients.AccountServiceAPIClient;
 import pl.dudi.orderservice.service.producer.EmailProducer;
 import pl.dudi.orderservice.utility.UUIDGenerator;
 
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.List;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    public static final PageRequestDto DEFAULT_ORDER_HISTORY_REQUEST = new PageRequestDto(1, 10, "desc", "issuedDateTime");
 
     private final OrderDao orderDAO;
     private final OrderMapper orderMapper;
@@ -46,19 +46,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderResponseMessage processOrder(int customerCode, OrderRequestDto orderRequest) {
+    public OrderDto processOrder(int customerCode, OrderRequestDto orderRequest) {
         CustomerDto customerDto = accountServiceAPIClient.findCustomerAccount(customerCode);
-        Order order = orderDAO.addOrderToProcess(customerCode, createOrder(orderRequest,customerCode));
-        String emailResponse = emailProducer.sendOrderProcessingEmail(customerDto, orderMapper.mapToOrderDto(order));
-        return new OrderResponseMessage(emailResponse, orderMapper.mapToOrderDto(order));
+        Order order = orderDAO.addOrder(customerCode, createOrder(orderRequest,customerCode));
+        emailProducer.sendOrderProcessingEmail(customerDto, orderMapper.mapToOrderDto(order));
+        return orderMapper.mapToOrderDto(order);
     }
 
     @Override
     public OrderDto getOrder(String orderNumber) {
-        Order order = orderDAO.findOrderByOrderNumber(orderNumber)
-            .orElseThrow(() -> new OrderNotFoundException(String.format(
-                "Order [%s] doesn't exist", orderNumber
-            )));
+        Order order = orderDAO.findOrderByOrderNumber(orderNumber);
         return orderMapper.mapToOrderDto(order);
     }
 
@@ -68,6 +65,23 @@ public class OrderServiceImpl implements OrderService {
         return orders.stream()
             .map(orderMapper::mapToOrderDto)
             .toList();
+    }
+
+    @Override
+    public String cancelOrder(String orderNumber) {
+        Order order = orderDAO.findOrderByOrderNumber(orderNumber);
+        if (order.getCancelTill().isAfter(OffsetDateTime.now())) {
+            orderDAO.cancelOrder(orderNumber,Status.CANCELED);
+            return "Order cancelled successfully";
+        }
+        return "Order is already in production";
+    }
+
+    @Scheduled(cron = "0 0 6,10,14 * * *")
+    @Override
+    public void setOrderToProcess() {
+        log.info("Adding orders to process {}", Instant.now());
+        orderDAO.addOrdersToProcess(Status.ISSUED, Status.IN_PROGRESS, OffsetDateTime.now());
     }
 
     private Order createOrder(OrderRequestDto orderRequest, int customerCode) {
