@@ -21,7 +21,7 @@ public class EmailProducer {
     private String managementEmailRoutingKey;
 
     public void sendInvoiceToCustomer(InvoiceDto invoice, CustomerDto customerDetails) {
-        EmailDetails emailDetails = new EmailDetails(invoice, customerDetails.getEmail());
+        EmailDetails emailDetails = new EmailDetails(invoice, customerDetails.email());
         Object response = rabbitTemplate.convertSendAndReceive(exchange, managementEmailRoutingKey, emailDetails);
     }
 }

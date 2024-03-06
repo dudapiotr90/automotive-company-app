@@ -20,10 +20,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto prepareCustomerDetails(OAuth2User user) {
         CustomerDto customer = extractUserData(user);
-        CustomerDto existingCustomer = accountServiceAPIClient.getCustomerDetails(customer.getCustomerCode());
+        CustomerDto existingCustomer = accountServiceAPIClient.getCustomerDetails(customer.customerCode());
         if (Objects.isNull(existingCustomer)) {
             CustomerDto registeredCustomer = accountServiceAPIClient.registerCustomerAccount(customer);
-            log.info(String.format("Account %s created" , customer.getCustomerCode()));
+            log.info(String.format("Account %s created" , customer.customerCode()));
             return registeredCustomer;
         }
         return existingCustomer;

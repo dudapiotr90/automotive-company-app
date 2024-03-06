@@ -1,16 +1,14 @@
-package pl.dudi.invoiceservice.model;
+package pl.dudi.customerservice.dto.response;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-public record Invoice(
-    Customer customer,
+public record InvoiceDto(
     OffsetDateTime issuedAt,
     OffsetDateTime completed,
     String orderNumber,
     String invoiceNumber,
     BigDecimal allItems,
-    BigDecimal totalAmount,
-    Issuer issuer
-    ) {
+    BigDecimal totalAmount
+) {
 }

@@ -1,4 +1,4 @@
-package pl.dudi.customerservice.dto;
+package pl.dudi.customerservice.dto.request;
 
 
 public record OpinionDto(

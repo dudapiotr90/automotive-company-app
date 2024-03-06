@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
-import pl.dudi.invoiceservice.dto.InvoiceDto;
-import pl.dudi.invoiceservice.dto.InvoiceRequestDto;
+import pl.dudi.invoiceservice.dto.request.InvoiceRequestDto;
+import pl.dudi.invoiceservice.dto.response.InvoiceFile;
 import pl.dudi.invoiceservice.model.Invoice;
 import pl.dudi.invoiceservice.model.PdfFile;
 import pl.dudi.invoiceservice.service.DocumentTransformer;
@@ -24,13 +24,13 @@ public class ManagementListener {
     private final FileService fileService;
 
     @RabbitListener(queues = {"${rabbitmq.queue.management.invoice.name}"})
-    public InvoiceDto consumeInvoiceRequest(InvoiceRequestDto request) {
+    public InvoiceFile consumeInvoiceRequest(InvoiceRequestDto request) {
         Invoice invoice = invoiceService.issueInvoice(request);
         PdfFile pdf = invoiceGenerator.generateInvoice(request, invoice);
 
-        InvoiceDto invoiceDto = documentTransformer.prepareInvoiceDto(pdf, invoice);
-        fileService.sendFileToExternalHosting(invoiceDto);
-        return invoiceDto;
+        InvoiceFile invoiceFile = documentTransformer.prepareInvoiceDto(pdf, invoice);
+        fileService.sendFileToExternalHosting(invoiceFile);
+        return invoiceFile;
 
     }
 }

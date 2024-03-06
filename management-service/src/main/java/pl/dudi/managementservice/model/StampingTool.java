@@ -1,4 +1,4 @@
 package pl.dudi.managementservice.model;
 
-public class StampingTool {
+public record StampingTool() {
 }

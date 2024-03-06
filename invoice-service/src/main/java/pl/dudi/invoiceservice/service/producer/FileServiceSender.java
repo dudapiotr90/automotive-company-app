@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import pl.dudi.invoiceservice.dto.InvoiceDto;
+import pl.dudi.invoiceservice.dto.response.InvoiceFile;
 import pl.dudi.invoiceservice.service.FileService;
 
 @Slf4j
@@ -23,8 +23,8 @@ public class FileServiceSender implements FileService {
 
 
     @Override
-    public void sendFileToExternalHosting(InvoiceDto invoiceDto) {
+    public void sendFileToExternalHosting(InvoiceFile invoiceFile) {
         log.info("invoice send to file service");
-        rabbitTemplate.convertAndSend(exchange,invoiceFileRoutingKey,invoiceDto);
+        rabbitTemplate.convertAndSend(exchange,invoiceFileRoutingKey, invoiceFile);
     }
 }

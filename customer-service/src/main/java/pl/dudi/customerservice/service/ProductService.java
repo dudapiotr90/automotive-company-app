@@ -1,7 +1,7 @@
 package pl.dudi.customerservice.service;
 
 import org.springframework.data.domain.Page;
-import pl.dudi.customerservice.dto.OpinionDto;
+import pl.dudi.customerservice.dto.request.OpinionDto;
 
 public interface ProductService {
     String submitOpinion(String productNumber, OpinionDto opinion);

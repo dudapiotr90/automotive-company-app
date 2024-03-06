@@ -7,9 +7,9 @@ import com.itextpdf.layout.borders.Border;
 import com.itextpdf.layout.element.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pl.dudi.invoiceservice.dto.CustomerDetailsDto;
-import pl.dudi.invoiceservice.dto.InvoiceRequestDto;
-import pl.dudi.invoiceservice.dto.SellerDetailsDto;
+import pl.dudi.invoiceservice.dto.request.CustomerDetailsDto;
+import pl.dudi.invoiceservice.dto.request.InvoiceRequestDto;
+import pl.dudi.invoiceservice.dto.request.SellerDetailsDto;
 import pl.dudi.invoiceservice.service.InvoiceInfoGenerator;
 
 import static pl.dudi.invoiceservice.service.impl.InvoiceTitleGeneratorImpl.PAGE_WIDTH;

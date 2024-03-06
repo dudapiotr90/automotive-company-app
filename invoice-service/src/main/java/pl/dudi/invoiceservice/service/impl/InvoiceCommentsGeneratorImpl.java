@@ -8,7 +8,7 @@ import com.itextpdf.layout.element.LineSeparator;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import org.springframework.stereotype.Service;
-import pl.dudi.invoiceservice.dto.OrderDetailsDto;
+import pl.dudi.invoiceservice.dto.request.OrderDetailsDto;
 import pl.dudi.invoiceservice.service.InvoiceCommentsGenerator;
 
 @Service
