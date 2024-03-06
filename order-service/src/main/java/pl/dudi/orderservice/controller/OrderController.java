@@ -43,12 +43,12 @@ public class OrderController {
 
 
     @PostMapping("/order")
-    public ResponseEntity<OrderResponseMessage> issueOrder(
+    public ResponseEntity<OrderDto> issueOrder(
         @RequestHeader("customerCode") int customerCode,
         @RequestBody OrderRequestDto orderRequest
     ) {
-        OrderResponseMessage message = orderService.processOrder(customerCode,orderRequest);
-        return ResponseEntity.ok(message);
+        OrderDto order = orderService.processOrder(customerCode,orderRequest);
+        return ResponseEntity.ok(order);
     }
 
     @GetMapping("/process")
@@ -58,5 +58,13 @@ public class OrderController {
     ){
         List<OrderDto> orders = orderService.getOrdersToProcess(status);
         return ResponseEntity.ok(orders);
+    }
+
+    @DeleteMapping("/order")
+    public ResponseEntity<String> cancelOrder(
+        @RequestParam("orderNumber") String orderNumber
+    ) {
+        String confirmationMessage = orderService.cancelOrder(orderNumber);
+        return ResponseEntity.ok(confirmationMessage);
     }
 }

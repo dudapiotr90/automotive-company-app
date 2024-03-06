@@ -1,23 +1,16 @@
 package pl.dudi.managementservice.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class ProductionTaskDto {
-
-    private String productNumber;
-    private BigDecimal piecesToMake;
-    private String priority;
-    private String status;
-    private String taskDescription;
-    private OffsetDateTime started;
-    private OffsetDateTime deadline;
-    private Long piecesAlreadyMade;
+public record ProductionTaskDto(
+    String productNumber,
+    BigDecimal piecesToMake,
+    String priority,
+    String status,
+    String taskDescription,
+    OffsetDateTime started,
+    OffsetDateTime deadline,
+    Long piecesAlreadyMade
+) {
 }

@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class SellerDetailsDto {
-    private String companyName;
-    private String nip;
-    private String phoneNumber;
-    private String email;
+public record SellerDetailsDto(
+    String companyName,
+    String nip,
+    String phoneNumber,
+    String email
+) {
 }

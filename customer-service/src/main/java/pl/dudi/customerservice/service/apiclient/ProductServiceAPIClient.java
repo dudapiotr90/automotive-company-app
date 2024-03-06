@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.customerservice.configuration.feign.FeignClientConfig;
-import pl.dudi.customerservice.dto.OpinionDto;
+import pl.dudi.customerservice.dto.request.OpinionDto;
 import pl.dudi.customerservice.model.OpinionRequest;
 
 @FeignClient(name = "product-service",configuration = FeignClientConfig.class)

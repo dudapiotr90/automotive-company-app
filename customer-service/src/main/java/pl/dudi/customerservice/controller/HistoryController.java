@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.dudi.basedomains.dto.orders.OrderDto;
-import pl.dudi.customerservice.model.InvoiceDto;
+import pl.dudi.customerservice.dto.response.InvoiceDto;
 import pl.dudi.customerservice.service.HistoryService;
 
 @RestController

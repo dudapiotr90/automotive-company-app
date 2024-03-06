@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.dudi.customerservice.dto.OpinionDto;
+import pl.dudi.customerservice.dto.request.OpinionDto;
 import pl.dudi.customerservice.service.ProductService;
 
 @RestController
