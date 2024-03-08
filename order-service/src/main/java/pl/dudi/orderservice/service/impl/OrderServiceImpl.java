@@ -11,6 +11,7 @@ import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.utils.PageableService;
 import pl.dudi.orderservice.dto.OrderRequestDto;
+import pl.dudi.orderservice.exception.OrderProcessingException;
 import pl.dudi.orderservice.infrastructure.database.dao.OrderDao;
 import pl.dudi.orderservice.mapper.OrderMapper;
 import pl.dudi.orderservice.model.Order;
@@ -54,6 +55,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public OrderDto modifyOrder(int customerCode, String orderNumber, OrderRequestDto orderRequest) {
+        CustomerDto customerDto = accountServiceAPIClient.findCustomerAccount(customerCode);
+        Order order = orderDAO.findOrderByOrderNumber(orderNumber);
+        if (!order.getStatus().equals(Status.ISSUED)) {
+            throw new OrderProcessingException("Can't modify order that is already in process");
+        }
+        Order modifiedOrder = orderDAO.modifyOrder(editOrder(order, orderRequest));
+        emailProducer.sendOrderProcessingEmail(customerDto, orderMapper.mapToOrderDto(order));
+        return orderMapper.mapToOrderDto(modifiedOrder);
+    }
+
+    @Override
     public OrderDto getOrder(String orderNumber) {
         Order order = orderDAO.findOrderByOrderNumber(orderNumber);
         return orderMapper.mapToOrderDto(order);
@@ -94,6 +107,12 @@ public class OrderServiceImpl implements OrderService {
             .orderItems(orderItemService.prepareOrderItems(orderRequest.getOrderItems()))
             .customerCode(customerCode)
             .build();
+    }
+
+    private Order editOrder(Order order, OrderRequestDto orderRequest) {
+        return order
+            .withComment(orderRequest.getCustomerComment())
+            .withOrderItems(orderItemService.prepareOrderItems(orderRequest.getOrderItems()));
     }
 
 }

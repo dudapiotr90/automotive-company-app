@@ -43,6 +43,13 @@ public class OrderRepository implements OrderDao {
     }
 
     @Override
+    public Order modifyOrder(Order order) {
+        OrderEntity orderEntity = orderMapper.mapToOrderEntity(order);
+        OrderEntity updated = orderJpaRepository.updateOrder(orderEntity.getOrderNumber(),orderEntity.getComment(),orderEntity.getOrderItems());
+        return orderMapper.mapToOrder(updated);
+    }
+
+    @Override
     public Order findOrderByOrderNumber(String orderNumber) {
         OrderEntity order = orderJpaRepository.findByOrderNumber(orderNumber)
             .orElseThrow(() -> new OrderNotFoundException(String.format(
