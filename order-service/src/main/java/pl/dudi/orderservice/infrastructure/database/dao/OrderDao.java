@@ -22,4 +22,6 @@ public interface OrderDao {
     void cancelOrder(String orderNumber, Status status);
 
     void addOrdersToProcess(Status currentStatus, Status newStatus, OffsetDateTime time);
+
+    Order modifyOrder(Order order);
 }

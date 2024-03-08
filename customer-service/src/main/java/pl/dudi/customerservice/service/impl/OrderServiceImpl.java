@@ -29,4 +29,10 @@ public class OrderServiceImpl implements OrderService {
     public String cancelOrder(String orderNumber) {
         return apiClient.cancelOrder(orderNumber);
     }
+
+    @Override
+    public OrderDetails modifyOrder(OAuth2User user, String orderNumber, OrderRequestDto request) {
+        CustomerDto customer = customerService.extractUserData(user);
+        return apiClient.modifyOrder(customer.customerCode(),orderNumber,request);
+    }
 }

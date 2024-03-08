@@ -33,6 +33,6 @@ public class OrderEntity {
 
     private OffsetDateTime cancelTill;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private Set<OrderItemEntity> orderItems;
 }

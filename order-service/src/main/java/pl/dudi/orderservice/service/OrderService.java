@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.orderservice.dto.OrderRequestDto;
-import pl.dudi.orderservice.dto.OrderResponseMessage;
 import pl.dudi.orderservice.model.Status;
 
 import java.util.List;
@@ -24,4 +23,5 @@ public interface OrderService {
 
     void setOrderToProcess();
 
+    OrderDto modifyOrder(int customerCode, String orderNumber, OrderRequestDto orderRequest);
 }
