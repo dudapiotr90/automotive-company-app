@@ -4,12 +4,13 @@ package pl.dudi.orderservice.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.dudi.basedomains.dto.PageRequestDto;
 import pl.dudi.basedomains.dto.orders.OrderDto;
 import pl.dudi.orderservice.dto.OrderRequestDto;
-import pl.dudi.orderservice.dto.OrderResponseMessage;
 import pl.dudi.orderservice.model.Status;
 import pl.dudi.orderservice.service.OrderService;
 
@@ -66,5 +67,18 @@ public class OrderController {
     ) {
         String confirmationMessage = orderService.cancelOrder(orderNumber);
         return ResponseEntity.ok(confirmationMessage);
+    }
+
+    @PutMapping("/order")
+    public ResponseEntity<OrderDto> modifyOrder(
+        @RequestHeader("customerCode") int customerCode,
+        @RequestParam("orderNumber") String orderNumber,
+        @RequestBody OrderRequestDto orderRequest
+    ) {
+        OrderDto order = orderService.modifyOrder(customerCode,orderNumber, orderRequest);
+        return ResponseEntity
+            .ok()
+            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .body(order);
     }
 }

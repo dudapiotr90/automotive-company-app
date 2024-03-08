@@ -42,5 +42,17 @@ public class OrderController {
             .body(confirmationMessage);
     }
 
+    @PutMapping
+    public ResponseEntity<OrderDetails> modifyOrder(
+        @AuthenticationPrincipal OAuth2User user,
+        @RequestParam String orderNumber,
+        @RequestBody OrderRequestDto request
+    ) {
+        OrderDetails order = orderService.modifyOrder(user, orderNumber, request);
+        return ResponseEntity
+            .ok()
+            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+            .body(order);
+    }
 
 }

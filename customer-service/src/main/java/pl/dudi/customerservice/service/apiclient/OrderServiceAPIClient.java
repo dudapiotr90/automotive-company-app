@@ -21,4 +21,10 @@ public interface OrderServiceAPIClient {
     @DeleteMapping("orders/order")
     String cancelOrder(@RequestParam("orderNumber") String orderNumber);
 
+    @PutMapping("/orders/order")
+    OrderDetails modifyOrder(
+        @RequestHeader("customerCode") int customerCode,
+        @RequestParam("orderNumber") String orderNumber,
+        @RequestBody OrderRequestDto request
+    );
 }

@@ -7,11 +7,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.dudi.orderservice.infrastructure.database.entity.OrderEntity;
+import pl.dudi.orderservice.infrastructure.database.entity.OrderItemEntity;
 import pl.dudi.orderservice.model.Status;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface OrderJpaRepository extends JpaRepository<OrderEntity,Long> {
@@ -41,4 +43,13 @@ public interface OrderJpaRepository extends JpaRepository<OrderEntity,Long> {
         AND cancelTill < ?3
         """)
     void changeOrdersStatus(Status currentStatus, Status newStatus, OffsetDateTime time);
+
+    @Modifying
+    @Query("""
+        UPDATE OrderEntity oe
+        SET comment = ?2,
+            orderItems = ?3
+        WHERE orderNumber = ?1
+        """)
+    OrderEntity updateOrder(String orderNumber, String comment, Set<OrderItemEntity> orderItems);
 }

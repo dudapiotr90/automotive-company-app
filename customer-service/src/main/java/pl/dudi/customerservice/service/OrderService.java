@@ -9,4 +9,5 @@ public interface OrderService {
 
     String cancelOrder(String orderNumber);
 
+    OrderDetails modifyOrder(OAuth2User user, String orderNumber, OrderRequestDto request);
 }
